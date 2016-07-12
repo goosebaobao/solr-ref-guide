@@ -50,7 +50,7 @@ roam~1 匹配 roams，foam，但是不匹配 foams，除非把距离修改为 2
 
 要执行临近搜索，使用波浪符 ~ ，并在要搜索的短语末尾添加一个数字，示例如下
 
-"jakarta apache"~10，表示在文档里搜索 apache 和 jakarta，互相之间间隔 10个 单词
+"jakarta apache"~10，表示在文档里搜索 apache 和 jakarta，互相之间间隔 10 个单词
 
 ### 范围搜索
 
