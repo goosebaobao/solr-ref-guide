@@ -1,4 +1,4 @@
 # 关于本书
 
-翻译 apache solr ref guide 6.0
+翻译自 apache solr ref guide 6.0
 
