@@ -59,6 +59,7 @@ roam~1 匹配 roams，foam，但是不匹配 foams，除非把距离修改为 2
 * mod\_date:\[20020101 TO 20030101\]
 
 范围查询不限于日期或数字，字符串也支持，此时按字典数序，示例：
+
 * title:{Aida TO Carmen}
 
 {x TO y}，表示 x 与 y 之间，不包含 x 和 y
