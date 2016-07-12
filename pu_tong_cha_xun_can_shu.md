@@ -15,4 +15,4 @@
 | omitHeader |  |
 | wt |  |
 | logParamsList |  |
-| echoParams |  |
+| echoParams | - |
