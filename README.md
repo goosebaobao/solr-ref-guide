@@ -1,3 +1,4 @@
-# My Awesome Book
+# 关于本书
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+翻译 apache solr ref guide 6.0
+
