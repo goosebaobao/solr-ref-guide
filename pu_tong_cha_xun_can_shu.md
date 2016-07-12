@@ -12,7 +12,7 @@
 | explainOther |  |
 | timeAllowed |  |
 | segmentTerminateEarly |  |
-| omitHeader |  |
-| wt |  |
+| omitHeader | 默认=false，返回结果是否忽略header |
+| wt | 返回结果的格式，例如：csv，json，php，xml，...... |
 | logParamsList |  |
 | echoParams | - |
