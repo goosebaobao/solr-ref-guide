@@ -38,11 +38,11 @@ solr 默认查询解析器为 “lucene” 解析器
 
 solr 标准查询解析器支持模糊搜索，基于 Damerau-Levenshtein Distance 或 Edit Distance 算法。要执行模糊搜索，在单个词条末尾使用波浪符~，示例如下
 
-roam~ 匹配 roams，foam，foams，也匹配 roam 本身
+> roam~ 匹配 roams，foam，foams，也匹配 roam 本身
 
 还可以附带一个距离参数在波浪符后面，取值为 0~2，默认=2，示例如下
 
-roam~1 匹配 roams，foam，但是不匹配 foams，除非把距离修改为 2
+> roam~1 匹配 roams，foam，但是不匹配 foams，除非把距离修改为 2
 
 ### 临近搜索
 
@@ -50,27 +50,69 @@ roam~1 匹配 roams，foam，但是不匹配 foams，除非把距离修改为 2
 
 要执行临近搜索，使用波浪符 ~ ，并在要搜索的短语末尾添加一个数字，示例如下
 
-"jakarta apache"~10，表示在文档里搜索 apache 和 jakarta，互相之间间隔 10 个单词
+> "jakarta apache"~10，表示在文档里搜索 apache 和 jakarta，互相之间间隔 10 个单词
 
 ### 范围搜索
 
 示例
 
-* mod\_date:\[20020101 TO 20030101\]
+> mod\_date:\[20020101 TO 20030101\]
 
 范围查询不限于日期或数字，字符串也支持，此时按字典数序，示例：
 
-* title:{Aida TO Carmen}
+> title:{Aida TO Carmen}
 
-{x TO y}，表示 x 与 y 之间，不包含 x 和 y
-\[x TO y\]，表示 x 与 y 之间，且包含 x 和 y
-\[x TO y}，也是可以滴
+范围区间
+
+* {x TO y}，表示 x 与 y 之间，不包含 x 和 y
+* \[x TO y\]，表示 x 与 y 之间，且包含 x 和 y
+* \[x TO y}，也是可以滴
 
 ### 词条加权搜索
 
-### 固定分值搜索
+使用插入符号 ^ 来指定词条的相关性权重，在插入符后的数字是权重因子，例如：搜索 "jarkarta apache"，想要 "jakarta" 有更多的相关性，可以提高它的权重，如下
+
+> jakarta^4 apache
+
+也可以为短语加权，如下
+
+> "jakarta apache"^4 "jakarta lucene"
+
+默认的权重因子=1，虽然权重因子必须是正数，但是可以小于1，例如0.2
+
+### 固定分数搜索
+
+相同的查询条件，在不同的文档里有着不同的匹配度，该匹配度用分数表示。固定分数查询可以使一个查询对于任何匹配的文档都有一个固定的分数，格式如下
+
+> &lt;查询语句&gt;^=&lt;分数&gt;
+
+如果你仅需要匹配词条，而不关注匹配的词条在文档里出现的频率\/次数及词条在文档所有词条所占比例（这也是影响匹配度的因子），就可以使用固定分数查询。示例
+
+> \(description:blue OR color:blue\)^=1.0 text:shoes
+
+注意，匹配度由下述情况来决定
+
+* 文档本身的权重，越大分数越大
+* 字段的权重，越大分数越大
+* 文档里的词条数量，越多分数越小
+* 匹配的词条在文档里出现了多少次，越多分数越高
+* 匹配的词条数目占文档总词条数目的比例，比例越大分数越高
 
 ## 规格化字段
+
+数据在 solr 里是按字段进行索引的。搜索时可以指定字段进行搜索。在 schema 里定义了默认的字段，如果搜索时未指定字段，则会在默认字段里进行搜索
+
+示例
+
+> title:"The Right Way" AND text:go
+
+如果 text 字段是默认字段，也可以这样
+
+> title:"Do it right" AND go
+
+字段只对**第一个词条**生效，后续的词条将在默认字段里搜索，如下
+
+> title:Do it right，等同于 title:Do AND text: it right
 
 ## 逻辑操作符
 
