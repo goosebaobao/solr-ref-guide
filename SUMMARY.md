@@ -8,4 +8,5 @@
        * [DisMax 查询解析器](dismax_cha_xun_jie_xi_qi.md)
        * [扩展的 DisMax 查询解析器](kuo_zhan_de_dismax_cha_xun_jie_xi_qi.md)
        * [函数查询](han_shu_cha_xun.md)
+       * 查询中的局部参数
 
