@@ -6,5 +6,5 @@
        * [普通查询参数](pu_tong_cha_xun_can_shu.md)
        * [标准查询解析器](biao_zhun_cha_xun_jie_xi_qi.md)
        * [DisMax 查询解析器](dismax_cha_xun_jie_xi_qi.md)
-       * 扩展的 DisMax 查询解析器
+       * [扩展的 DisMax 查询解析器](kuo_zhan_de_dismax_cha_xun_jie_xi_qi.md)
 
