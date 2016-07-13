@@ -68,6 +68,7 @@ solr 标准查询解析器支持模糊搜索，基于 Damerau-Levenshtein Distan
 * \[x TO y\]，表示 x 与 y 之间，且包含 x 和 y
 * \[x TO y}，也是可以滴
 
+注意：\* 号可以表示无限，在范围区间的两侧都可以使用
 ### 词条加权搜索
 
 使用插入符号 ^ 来指定词条的相关性权重，在插入符后的数字是权重因子，例如：搜索 "jarkarta apache"，想要 "jakarta" 有更多的相关性，可以提高它的权重，如下
@@ -129,17 +130,38 @@ solr 标准查询解析器支持模糊搜索，基于 Damerau-Levenshtein Distan
 * 逻辑操作符全部大写
 
 * 标准查询解析器支持所有逻辑操作符：AND，NOT，OR，+，-；DisMax 查询解析器只支持 +，-
+
 * OR 操作符是默认的连接符号，这意味着如果 2 个词条之间木有逻辑操作符，那就表示有个隐含的 OR 操作符
 
 ## 特殊字符转义
 
+如下字符出现在查询中时是有特别含义滴，若要查询字符本身需要转义
 
++ - && \|\| ! \( \) { } \[ \] ^ " ~ \* ? : \/
+
+转义符为反斜杠 \，查询 \(1+1\):2示例如下
+
+> \\(1\+1\\)\:2
 
 ## 组合词条成子查询
 
+solr 支持用圆括号来组合查询，示例如下
 
+> \(jakarta OR apache\) AND website
+
+表示查询须匹配 website，且 jakarta 或 apache 至少一个
+
+### 针对字段的组合查询
+
+在单个字段上使用多个逻辑操作符，用圆括号来组合，示例
+
+> title:\(+return +"pink panther"\)
 
 ## 注释
+
+ solr 支持 c 语言样式的注释，即 \/\* 注释 \*\/。注释可以内嵌在查询中，示例
+
+> "jakarta apache" \/\* this is a comment in the middle of a normal query string \*\/ OR jakarta
 
 ## Lucene 查询解析器 和 solr 标准查询解析器差异
 
