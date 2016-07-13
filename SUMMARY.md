@@ -7,5 +7,5 @@
        * [标准查询解析器](biao_zhun_cha_xun_jie_xi_qi.md)
        * [DisMax 查询解析器](dismax_cha_xun_jie_xi_qi.md)
        * [扩展的 DisMax 查询解析器](kuo_zhan_de_dismax_cha_xun_jie_xi_qi.md)
-       * 函数查询
+       * [函数查询](han_shu_cha_xun.md)
 
