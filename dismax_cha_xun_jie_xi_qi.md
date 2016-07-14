@@ -56,5 +56,21 @@ Lucene/Solr 在处理查询时，有 3 类子句：强制的，禁止的，可�
 
 貌似是对 pf 里的短语指定一个“间距”，如果在这个间距内也算是短语
 
+### tie
 
+两个field:A和B，query分别在A和B中都能命中，其得分如下：
+
+       A     B  max
+       
+doc1  0.5  0.8  0.8
+
+doc2  0.8  0.1  0.8
+
+    这时候两个doc在不同field上的max得分相同，但是我们其实更希望doc1得分更高
+
+所以这时候采用DisjunctionMaxQuery和tie break参数=0.1
+
+根据算法(score of matching clause with the highest score) + ( (tie paramenter) * (scores of any other matching clauses) )
+
+新的得分为：finalscore: 0.85(doc1) 0.81(doc2)这样就能区分出
 
