@@ -18,7 +18,7 @@ DisMax 支持 Lucene 查询解析器语法的精简子集
 | mm | 最小匹配数，指定查询最少要匹配几个条件，如果没有指定该参数，则依赖于 q.op 参数（不论该参数是在查询条件里指定，还是在 solrconfig.xml 里指定的默认值，或 schema.xml 里通过 defaultOperator 选项指定）：q.op = AND 则 mm = 100%；q.op = OR 则 mm=1。用户也可以在 solrconfig.xml 里指定 mm 的默认值。该参数还允许在表达式里混入空格，例如 " 3 &lt; -25% 10 &lt; -3\n", " \n-25%\n", " \n3\n " |
 | pf | phrase fields：增加文档的分数以防 q 参数的所有词条出现在附近 （神马意思?） |
 | ps | phrase slop：指定 2 个词条分开的位置数，以匹配一个特定的短语 |
-| qs | query phrase slop：含义同 ps，一般和 qf 参数一起适应 |
+| qs | query phrase slop：含义同 ps，一般和 qf 参数一起使用 |
 | tie | Tie Breaker：一个远小于 1 的浮点值，在 DisMax 查询里作为决定性因素 （这 tmd 又是神马意思？） |
 | bq | boost query：指定一个因子，对于匹配时需要加强重要性的那些词条或短语 |
 | bf | Boost Functions：指定一个函数来加权 |
@@ -53,4 +53,8 @@ Lucene/Solr 在处理查询时，有 3 类子句：强制的，禁止的，可�
 例如，查询 q=hello world，那么 "hello world" 显然比 "hello this is a world" 更匹配，因为其不仅匹配了 hello 和 world，还同时将输入作为单个短语进行了匹配
 
 ### ps
+
+貌似是对 pf 里的短语指定一个“间距”，如果在这个间距内也算是短语
+
+
 
