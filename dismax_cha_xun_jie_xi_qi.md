@@ -23,10 +23,13 @@ DisMax 支持 Lucene 查询解析器语法的精简子集
 | bq | boost query：指定一个因子，对于匹配时需要加强重要性的那些词条或短语 |
 | bf | Boost Functions：指定一个函数来加权 |
 
-###qf
+### qf
 
 字段列表，每个字段都有一个权重因子来增强或减弱该字段在查询中的重要性，示例
 
 `qf="fieldOne^2.3 fieldTwo fieldThree^0.4"`
 
 上面例子表示 fieldOne 的权重因子为2.3，fieldTwo 为默认的权重因子，fieldThree 的权重因子为0.4mm
+
+### mm
+
