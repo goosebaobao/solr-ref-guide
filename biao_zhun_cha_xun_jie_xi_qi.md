@@ -7,8 +7,8 @@ solr 默认查询解析器为 “lucene” 解析器
 | 参数 | 说明 |
 | :--- | :--- |
 | q | 使用标准查询语法的查询语句，该参数为必须的 |
-| q.op | 查询表达式默认操作，取值为 AND \| OR，取代 solrconfig.xml里的配置 |
-| df | 默认字段， ，取代 solrconfig.xml里的配置 |
+| q.op | 查询表达式默认操作，取值为 AND , OR，取代 solrconfig.xml里的配置 |
+| df | 默认字段， 取代 solrconfig.xml里的配置 |
 
 ## 响应
 
@@ -139,18 +139,18 @@ solr 标准查询解析器支持模糊搜索，基于 Damerau-Levenshtein Distan
 
 如下字符出现在查询中时是有特别含义滴，若要查询字符本身需要转义
 
-* * && \|\| ! \( \) { } \[ \] ^ " ~ \* ? : \/
+`&& \|\| ! \( \) { } \[ \] ^ " ~ \* ? : \/`
 
 
 转义符为反斜杠 \，查询 \(1+1\):2示例如下
 
-> \\(1+1\\)\:2
+`\\(1+1\\)\:2`
 
 ## 组合词条成子查询
 
 solr 支持用圆括号来组合查询，示例如下
 
-> \(jakarta OR apache\) AND website
+`\(jakarta OR apache\) AND website`
 
 表示查询须匹配 website，且 jakarta 或 apache 至少一个
 
@@ -158,13 +158,13 @@ solr 支持用圆括号来组合查询，示例如下
 
 在单个字段上使用多个逻辑操作符，用圆括号来组合，示例
 
-> title:\(+return +"pink panther"\)
+`title:\(+return +"pink panther"\)`
 
 ## 注释
 
 solr 支持 c 语言样式的注释，即 \/\* 注释 \*\/。注释可以内嵌在查询中，示例
 
-> "jakarta apache" \/\* this is a comment in the middle of a normal query string \*\/ OR jakarta
+`"jakarta apache" \/\* this is a comment in the middle of a normal query string \*\/ OR jakarta`
 
 ## Lucene 查询解析器 和 solr 标准查询解析器差异
 
@@ -172,35 +172,36 @@ solr 标准查询解析器在如下方面和 lucene 查询解析器不同
 
 * 范围查询的 \* 号
 
-  * field:\[\* TO 100\] ，表示所有小于等于 100 的值
-  * field:\[100 TO \*\] ，表示所有大于等于 100 的值
-  * field:\[\* TO \*\]，表示所有值
+  * `field:\[\* TO 100\]` 表示所有小于等于 100 的值
+  * `field:\[100 TO \*\]` 表示所有大于等于 100 的值
+  * `field:\[\* TO \*\]` 表示所有值
 
 
 * 在最顶层查询中，支持纯的负查询（所有条件都是禁止的查询）
-  * -inStock:false ，表示所有 inStock 不为 false 的值
-  * -field:\[\* TO \*\]，表示 field 值为空的
+  * `-inStock:false` 表示所有 inStock 不为 false 的值
+  * `-field:\[\* TO \*\]` 表示 field 值为空的
 
 
 * FunctionQuery 语法挂钩：需要用引号将带圆括号的函数包围，如下第二例
 
-  * \_val\_:myfield
+  * `\_val\_:myfield`
 
-  * \_val\_:"recip\(rord\(myfield\),1,2,3\)"
+  * `\_val\_:"recip\(rord\(myfield\),1,2,3\)"`
 
 
 
 * 内嵌的查询语句支持任意类型的查询解析器
-  * inStock:true OR {!dismax qf='name manu' v='ipod'}
+
+  * `inStock:true OR {!dismax qf='name manu' v='ipod'}`
 
 
 * 支持特殊的 filter\(...\) 语法来指明某些查询子句应该被缓存到过滤器缓存\(filter cache\)，例如下面 3 个例子里的 inStock:true 会被缓存和重用
 
-  * q=features:songs OR filter\(inStock:true\)
+  `q=features:songs OR filter\(inStock:true\)`
 
-  * q=+manu:Apple +filter\(inStock:true\)
+  `q=+manu:Apple +filter\(inStock:true\)`
 
-  * q=+manu:Apple & fq=inStock:true
+  `q=+manu:Apple & fq=inStock:true`
 
 
 
@@ -210,15 +211,15 @@ solr 标准查询解析器在如下方面和 lucene 查询解析器不同
 
 字段类型为 TrieDateField 的，可以使用如下的语法
 
-* timestamp:\[\* TO NOW\]
+* `timestamp:\[\* TO NOW\]`
 
-* createdate:\[1976-03-06T23:59:59.999Z TO \*\]
+* `createdate:\[1976-03-06T23:59:59.999Z TO \*\]`
 
-* createdate:\[1995-12-31T23:59:59.999Z TO 2007-03-06T00:00:00Z\]
+* `createdate:\[1995-12-31T23:59:59.999Z TO 2007-03-06T00:00:00Z\]`
 
-* pubdate:\[NOW-1YEAR\/DAY TO NOW\/DAY+1DAY\]
+* `pubdate:\[NOW-1YEAR\/DAY TO NOW\/DAY+1DAY\]`
 
-* createdate:\[1976-03-06T23:59:59.999Z TO 1976-03-06T23:59:59.999Z+1YEAR\]
+* `createdate:\[1976-03-06T23:59:59.999Z TO 1976-03-06T23:59:59.999Z+1YEAR\]`
 
-* createdate:\[1976-03-06T23:59:59.999Z\/YEAR TO 1976-03-06T23:59:59.999Z\]
+* `createdate:\[1976-03-06T23:59:59.999Z\/YEAR TO 1976-03-06T23:59:59.999Z\]`
 
