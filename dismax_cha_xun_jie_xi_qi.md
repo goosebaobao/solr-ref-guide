@@ -50,4 +50,4 @@ Lucene/Solr 在处理查询时，有 3 类子句：强制的，禁止的，可�
 
 格式如同 qf，如果该字段匹配短语而非几个词条，那么会导致加权因子生效。
 
-例如，查询的是短语 "hello world"，那么 "hello world" 显然比 "hello this is a world" 更匹配
+例如，查询 q=hello world，那么 "hello world" 显然比 "hello this is a world" 更匹配
