@@ -58,19 +58,25 @@ Lucene/Solr 在处理查询时，有 3 类子句：强制的，禁止的，可�
 
 ### tie
 
-两个field:A和B，query分别在A和B中都能命中，其得分如下：
+如果一个查询在多个字段都匹配，tie 可以用来决定最终的得分，最终得分的计算公式为
 
-       A     B  max
-       
-doc1  0.5  0.8  0.8
+`分数最大值 + tie * (其他分数)`
 
-doc2  0.8  0.1  0.8
+示例如下
 
-    这时候两个doc在不同field上的max得分相同，但是我们其实更希望doc1得分更高
+两个 field: A 和 B，query 分别在 A 和 B 中都能命中，其得分如下：
 
-所以这时候采用DisjunctionMaxQuery和tie break参数=0.1
+|文档|字段A得分|字段B得分|最大得分
+| :---| :---| :---| :---|
+| doc1 | 0.5 | 0.8 | 0.8 |
+| doc2 | 0.8 | 0.1 | 0.8 |
 
-根据算法(score of matching clause with the highest score) + ( (tie paramenter) * (scores of any other matching clauses) )
+这时候两个doc在不同field上的max得分相同，但是我们其实更希望doc1得分更高，那么 tie 就可以派上用场了
 
-新的得分为：finalscore: 0.85(doc1) 0.81(doc2)这样就能区分出
+假设 tie = 0.1，则各自的最终分为
 
+`doc1 = 0.8 + 0.5 * 0.1 = 0.85`
+
+`doc2 = 0.8 + 0.1 * 0.1 = 0.81`
+
+doc1 胜出
