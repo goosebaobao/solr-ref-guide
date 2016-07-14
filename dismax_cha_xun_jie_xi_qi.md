@@ -24,6 +24,7 @@ DisMax 支持 Lucene 查询解析器语法的精简子集
 | bf | Boost Functions：指定一个函数来加权 |
 
 ###qf
+
 字段列表，每个字段都有一个权重因子来增强或减弱该字段在查询中的重要性，示例
 
 `qf="fieldOne^2.3 fieldTwo fieldThree^0.4"`
