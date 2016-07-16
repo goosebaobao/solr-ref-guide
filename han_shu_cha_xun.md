@@ -32,7 +32,7 @@
 | "constant" | 浮点常数 | 1.5 |
 | def | default 的简写，若值 1 不存在则返回值 2 | `def(rating,5)`：如果 rating 存在则返回之，否则返回 5 <br>`def(myfield, 1.0)`：如果字段 myfield 存在返回其值，否则返回 1.0 |
 | div | 除法，div(x,y) 表示 x 除以 y | `div(1,y)`<br>`div(sum(x,100),max(y,1))` |
-|  |  |  |
+| dist | 返回 n 维空间里 2 个矢量的距离 | `dist(2, x, y, 0, 0)`：(0,0) 和 (x,y) 之间的欧氏距离<br>`dist(1, x, y, 0, 0)`: (0,0) 和 (x,y) 之间的曼哈顿距离<br>`dist(2, x,y,z,0,0,0)`：(0,0,0) 和 (x,y,z) 之间的欧氏距离<br>`dist(1,x,y,z,e,f,g)`: (x,y,z) 和 (e,f,g) 之间的曼哈顿距离，每个字符是一个字段名 |
 |  |  |  |
 |  |  |  |
 |  |  |  |
