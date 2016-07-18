@@ -38,8 +38,8 @@
 | field | 返回字段的 docValues 或 indexed 值（数量？），对于 docValues，可以添加可选参数 min 或 max，返回 0 表示文档木有该字段 | 如下示例是等价的<br> `myFloatFieldName`<br>`field(myFloatFieldName)`<br>`field("myFloatFieldName")`<br>如果字段名是非典型的（例如包含了空格）用第三种写法<br>对于多值的 docValues 字段，示例如下<br>`field(myMultiValuedFloatField,min)`<br>`field(myMultiValuedFloatField,max)`|
 | hsin |  |  |
 | idf |  |  |
-| if | 条件判断，语法为<br>`if(test,value1,value2)`<br>`test` 是个逻辑值或逻辑表达式<br>`value1` test = true 时返回<br>`values` test = false 时返回 |  |
-|  |  |  |
+| if | 条件判断，语法为<br>`if(test,value1,value2)`<br>`test` 是个逻辑值或逻辑表达式<br>`value1` test = true 时返回<br>`values` test = false 时返回<br>表达式可以是任意返回逻辑值的函数，或是返回数值的函数，此时 0 表示 false，或是 string，此时空串表示 false | `if(termfreq(cat,'electronics'),popularity,42)`<br>&nbsp;该函数检查每一文档，字段 cat 是否包含词条 "electronics"，如果包含，返回 popularity 字段的值，否则返回 42 |
+| linear | `m*x+c` 的函数形式，m、c 为常数，x 为变量<br>等价于 `sum(product(m,x),c)` 但是性能好些，因为只有一次函数调用 | `linear(x,m,c)`<br>`linear(x,2,4)` 返回 `2*x+4` |
 |  |  |  |
 |  |  |  |
 |  |  |  |
