@@ -50,31 +50,23 @@
 | not | 逻辑非 |  |
 | numdocs | 返回索引的文档数量，不包括已标记为删除但还没有物理删除的文档，这是个常数，对于索引里的任何文档都是同样的值 | `numdocs()` |
 | or | 逻辑或 | `or(value1,value2)` value1 和 value2 都为 true 时返回 true |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| ord | 返回索引字段的值的序号，从 1 开始。排序是依字典顺序，该字段为单值字段。若字段没有值返回 0 |  |
+| pow |  |  |
+| product |  |  |
+| query |  |  |
+| recip |  |  |
+| rord |  |  |
+| scale |  |  |
+| sqedist |  |  |
+| sqrt |  |  |
+| strdist |  |  |
+| sub |  |  |
+| sum |  |  |
+| sumtotaltermfreq |  |  |
+| termfreq |  |  |
+| tf |  |  |
+| top |  |  |
+| totaltermfreq |  |  |
+| xor() | 逻辑异或 | `xor(field1,field2)` field1 ，field2 都为 true 则返回 false，否则返回 true |
 
 
