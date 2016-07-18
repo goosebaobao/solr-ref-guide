@@ -66,7 +66,7 @@
 | termfreq |  |  |
 | tf |  |  |
 | top |  |  |
-| totaltermfreq |  |  |
+| totaltermfreq | 整个索引里，词条在字段里出现的次数 | `ttf(text,'memory')` |
 | xor() | 逻辑异或 | `xor(field1,field2)` field1 ，field2 都为 true 则返回 false，否则返回 true |
 
 
