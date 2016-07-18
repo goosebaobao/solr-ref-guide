@@ -36,9 +36,9 @@
 | docfreq(field,val) | 返回这个字段里包含这个值的文档数量，这是个常数 | `docfreq(text,'solr')`<br>`defType=func&q=docfreq(text,$myterm)&myterm=solr` |
 | exists | 如果任意字段存在就返回 true | `exists(author)` 任何文档在 author 字段有值就返回 true<br>`exists(query(price:5.00))` price 匹配 5.00 就返回 true |
 | field | 返回字段的 docValues 或 indexed 值（数量？），对于 docValues，可以添加可选参数 min 或 max，返回 0 表示文档木有该字段 | 如下示例是等价的<br> `myFloatFieldName`<br>`field(myFloatFieldName)`<br>`field("myFloatFieldName")`<br>如果字段名是非典型的（例如包含了空格）用第三种写法<br>对于多值的 docValues 字段，示例如下<br>`field(myMultiValuedFloatField,min)`<br>`field(myMultiValuedFloatField,max)`|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| hsin |  |  |
+| idf |  |  |
+| if | 条件判断，语法为<br>`if(test,value1,value2)`<br>`test` 是个逻辑值或逻辑表达式<br>`value1` test = true 时返回<br>`values` test = false 时返回 |  |
 |  |  |  |
 |  |  |  |
 |  |  |  |
