@@ -46,8 +46,8 @@
 | maxdoc | 返回索引的文档数量，包括已标记为删除但还没有物理删除的文档，这是个常数，对于索引里的任何文档都是同样的值 | `maxdoc()` |
 | min | 返回最小值 |  |
 | ms | 返回参数之间的时间差异，以毫秒为单位，参数可以是索引的 TrieDateField 字段，或NOW，或基于日期常数的日期计算<br>`ms()` 等价于 `ms(NOW)` 当前时间与 epoch 之间的毫秒差<br>epoch 1970-1-1 00:00:00.000<br>`ms(a)` a 与 epoch 之间的毫秒差<br>ms(a,b) : 时间 a 与 b 之间的毫秒差，注意 a 发生在 b 之后，即 a - b | `ms(NOW/DAY)`<br> `ms(2000-01-01T00:00:00Z)`<br> `ms(mydatefield)`<br>`ms(NOW,mydatefield)`<br> `ms(mydatefield,2000-01-01T00:00:00Z)`<br> `ms(datefield1,datefield2)` |
-|  |  |  |
-|  |  |  |
+| norm(field) |  |  |
+| not | 逻辑非 |  |
 |  |  |  |
 |  |  |  |
 |  |  |  |
