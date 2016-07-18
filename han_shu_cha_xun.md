@@ -40,8 +40,8 @@
 | idf |  |  |
 | if | 条件判断，语法为<br>`if(test,value1,value2)`<br>`test` 是个逻辑值或逻辑表达式<br>`value1` test = true 时返回<br>`values` test = false 时返回<br>表达式可以是任意返回逻辑值的函数，或是返回数值的函数，此时 0 表示 false，或是 string，此时空串表示 false | `if(termfreq(cat,'electronics'),popularity,42)`<br>&nbsp;该函数检查每一文档，字段 cat 是否包含词条 "electronics"，如果包含，返回 popularity 字段的值，否则返回 42 |
 | linear | `m*x+c` 的函数形式，m、c 为常数，x 为变量<br>等价于 `sum(product(m,x),c)` 但是性能好些，因为只有一次函数调用 | `linear(x,m,c)`<br>`linear(x,2,4)` 返回 `2*x+4` |
-|  |  |  |
-|  |  |  |
+| log | 对数，以 10 为底数 |  |
+| map | 根据输入是否落在某个范围来返回值，范围参数 min，max 必须是常数。如果输入 x 不在 min 和 max 之间，返回值为 x 或 default（如果指定了该参数） | `map(x,min,max,target)`<br>`map(x,0,0,1)` - 将 0 改为 1，处理默认值 0 时有用<br>`map(x,min,max,target,default)`<br>`map(x,0,100,1,-1)` - 将 0~100 之间的值改为 1，其他值 改为 -1 |
 |  |  |  |
 |  |  |  |
 |  |  |  |
