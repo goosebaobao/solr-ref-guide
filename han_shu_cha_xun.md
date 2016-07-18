@@ -42,8 +42,8 @@
 | linear | `m*x+c` 的函数形式，m、c 为常数，x 为变量<br>等价于 `sum(product(m,x),c)` 但是性能好些，因为只有一次函数调用 | `linear(x,m,c)`<br>`linear(x,2,4)` 返回 `2*x+4` |
 | log | 对数，以 10 为底数 |  |
 | map | 根据输入是否落在某个范围来返回值，范围参数 min，max 必须是常数。如果输入 x 不在 min 和 max 之间，返回值为 x 或 default（如果指定了该参数） | `map(x,min,max,target)`<br>`map(x,0,0,1)` - 将 0 改为 1，处理默认值 0 时有用<br>`map(x,min,max,target,default)`<br>`map(x,0,100,1,-1)` - 将 0~100 之间的值改为 1，其他值 改为 -1 |
-|  |  |  |
-|  |  |  |
+| max | 返回最大值 `max(x,y,...)` | `max(myfield,myotherfield,0)` |
+| maxdoc | 返回索引的文档数量，包括已标记为删除但还没有物理删除的文档，这是个常数，对于索引里的任何文档都是同样的值 | `maxdoc()` |
 |  |  |  |
 |  |  |  |
 |  |  |  |
