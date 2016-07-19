@@ -104,8 +104,8 @@
 
 `&fl=id,sum(x, y),score` 将会返回
 
-```<str name="id">foo</str>
+`<str name="id">foo</str>`
 
-<float name="sum(x,y)">40</float>
+`<float name="sum(x,y)">40</float>`
 
-<float name="score">0.343</float>```
+`<float name="score">0.343</float>`
