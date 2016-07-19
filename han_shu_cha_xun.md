@@ -79,3 +79,19 @@
 * `freq(doc2, fieldX:A) = 4`  A 在 doc2 里出现 4 次
 * `totalTermFreq(fieldX:A) = 5`  A 在所有文档里出现 5 次
 * `sumTotalTermFreq(fieldX) = 7`  对于 fieldX，5 个 A，1 个 B，1 个 C
+
+## 函数查询示例
+
+假设一个索引，字段名为 `boxnames`，保存了一些名字随意，尺寸(x,y,z)以米为单位的盒子，你要搜索名字匹配 `findbox` 且按体积排序的盒子，查询参数如下
+
+`q=boxname:findbox _val_:"product(x,y,z)"`
+
+这个查询将结果按盒子的体积排序，如果想要知道体积，你需要请求分数（score，包含了体积）
+
+`&fl=*,score`
+
+假设还有一个字段保存着重量，`weight`，要按盒子的密度排序且返回密度大小，可以提交下面的查询
+
+`http://localhost:8983/solr/collection_name/select?q=boxname:findbox _val_:"div(weight,product(x,y,z))"&fl=boxname x y z weight score`
+
+## 用函数排序
