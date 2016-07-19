@@ -59,7 +59,7 @@
 | scale |  |  |
 | sqedist |  |  |
 | sqrt |  |  |
-| strdist |  |  |
+| strdist | 计算 2 个字符串的距离，格式为 `strdist(string1, string2, distance measure)` | `strdist("SOLR",id,edit)`<br>&nbsp;&nbsp;distance measure 取值为<br>`jw`: Jaro-Winkler<br>`edit`: Levenstein or Edit distance<br>`ngram`: NGramDistance, 可以指定一个可选的 ngram size 参数，默认为 2<br>`FQN`: 实现了 StringDistance 接口的类名，该类必须有一个无参的构造函数 |
 | sub | 减法，sub(x,y) 即为 x - y | `sub(myfield,myfield2)` |
 | sum | 求和，add() 可以作为别名使用 | `sum(x,y,...)` |
 | sumtotaltermfreq | 返回 `totaltermfreq` 之和 | `sttf()` |
