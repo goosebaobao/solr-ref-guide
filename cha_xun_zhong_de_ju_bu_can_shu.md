@@ -31,3 +31,7 @@
 `fq={!df=summary}solr rocks` 等价于 `fq={!type=lucene df=summary}solr rocks`
 
 ## 用'v'键指定参数值
+
+局部参数里的特殊键 `v`，可以用来代替原查询参数，即
+
+`q={!dismax qf=myfield}solr rocks` 等价于 `q={!type=dismax qf=myfield v='solr rocks'}`
