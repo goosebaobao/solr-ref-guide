@@ -54,11 +54,11 @@
 | pow |  |  |
 | product |  |  |
 | query |  |  |
-| recip |  |  |
-| rord |  |  |
-| scale |  |  |
-| sqedist |  |  |
-| sqrt |  |  |
+| recip | `recip(x,m,a,b) = a/(m*x+b)`  m,a,b 为常数, x 是个函数 | `recip(myfield,m,a,b)`<br>`recip(rord(creationDate),1,1000,1000)` |
+| rord | ord 的反转 | `rord(myDateField)` |
+| scale | 将输入 x 缩放到 minTarget 和 maxTarget 之间，当前的实现会遍历所有的 x 值来确定 min 和 max 的值<br>如果文档被删除或者没有值，则会视同为0 | `scale(x,minTarget,maxTarget)`<br>`scale(x,1,2): scales the values of x such that all values will be between 1 and 2 inclusive.` |
+| sqedist | 欧氏距离的平方， | `sqedist(x_td, y_td, 0, 0)` |
+| sqrt | 平方根 | `sqrt(x)sqrt(100)sqrt(sum(x,100))` |
 | strdist | 计算 2 个字符串的距离，格式为 `strdist(string1, string2, distance measure)` | `strdist("SOLR",id,edit)`<br>&nbsp;&nbsp;distance measure 取值为<br>`jw`: Jaro-Winkler<br>`edit`: Levenstein or Edit distance<br>`ngram`: NGramDistance, 可以指定一个可选的 ngram size 参数，默认为 2<br>`FQN`: 实现了 StringDistance 接口的类名，该类必须有一个无参的构造函数 |
 | sub | 减法，sub(x,y) 即为 x - y | `sub(myfield,myfield2)` |
 | sum | 求和，add() 可以作为别名使用 | `sum(x,y,...)` |
