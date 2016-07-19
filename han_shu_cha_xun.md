@@ -53,7 +53,7 @@
 | ord | 返回索引字段的值的序号，从 1 开始。排序是依字典顺序，该字段为单值字段。若字段没有值返回 0 |  |
 | pow | 幂值，`pow(x,y) =x^y` | `pow(x,y)`<br>`pow(x,log(y))`<br>`pow(x,0.5)` 等价于 `sqrt` |
 | product | 乘积，参数为逗号分隔的值或函数，等价于 `mul(...)` | `product(x,y,...)` |
-| query | 返回指定的子查询的分数，如果子查询未匹配到文档的话返回一个默认值 | `query(subquery, default)`<br>`q=product(popularity, query({!dismaxv='solr rocks'})` 返回 popularity 和 DisMax 查询的分数的乘积<br>`q=product(popularity, query($qq))&qq={!dismax}solr rocks`: equivalent to the previous query, using parameter de-referencing.<br>`q=product(popularity, query($qq,0.1))&qq={!dismax}solr rocks`: specifies a default score of 0.1 for documents that don't match the DisMax query |
+| query | 返回指定的子查询的分数，如果子查询未匹配到文档的话返回一个默认值 | `query(subquery, default)`<br>`q=product(popularity, query({!dismaxv='solr rocks'})` 返回 popularity 和 DisMax 查询的分数的乘积<br>`q=product(popularity, query($qq))&qq={!dismax}solr rocks`: 等价于上面的查询，使用了参数引用<br>`q=product(popularity, query($qq,0.1))&qq={!dismax}solr rocks`: 指定了不匹配 DisMax 查询的文档的默认的分数为 0.1 |
 | recip | `recip(x,m,a,b) = a/(m*x+b)`  m,a,b 为常数, x 是个函数 | `recip(myfield,m,a,b)`<br>`recip(rord(creationDate),1,1000,1000)` |
 | rord | ord 的反转 | `rord(myDateField)` |
 | scale | 将输入 x 缩放到 minTarget 和 maxTarget 之间，当前的实现会遍历所有的 x 值来确定 min 和 max 的值<br>如果文档被删除或者没有值，则会视同为0 | `scale(x,minTarget,maxTarget)`<br>`scale(x,1,2): scales the values of x such that all values will be between 1 and 2 inclusive.` |
