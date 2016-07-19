@@ -95,3 +95,17 @@
 `http://localhost:8983/solr/collection_name/select?q=boxname:findbox _val_:"div(weight,product(x,y,z))"&fl=boxname x y z weight score`
 
 ## 用函数排序
+
+可以用函数的输出对查询结果排序，例如，要按距离排序
+
+`http://localhost:8983/solr/collection_name/select?q=*:*&sort=dist(2, point1, point2) desc`
+
+函数排序也支持伪字段：字段是动态生成且像一个正常字段那样返回结果，例如
+
+`&fl=id,sum(x, y),score` 将会返回
+
+```<str name="id">foo</str>
+
+<float name="sum(x,y)">40</float>
+
+<float name="score">0.343</float>```
