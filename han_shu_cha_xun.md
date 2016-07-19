@@ -51,8 +51,8 @@
 | numdocs | 返回索引的文档数量，不包括已标记为删除但还没有物理删除的文档，这是个常数，对于索引里的任何文档都是同样的值 | `numdocs()` |
 | or | 逻辑或 | `or(value1,value2)` value1 和 value2 都为 true 时返回 true |
 | ord | 返回索引字段的值的序号，从 1 开始。排序是依字典顺序，该字段为单值字段。若字段没有值返回 0 |  |
-| pow |  |  |
-| product |  |  |
+| pow | 幂值，`pow(x,y) =x^y` | `pow(x,y)`<br>`pow(x,log(y))`<br>`pow(x,0.5)` 等价于 `sqrt` |
+| product | 乘积，参数为逗号分隔的值或函数，等价于 `mul(...)` | `product(x,y,...)` |
 | query |  |  |
 | recip | `recip(x,m,a,b) = a/(m*x+b)`  m,a,b 为常数, x 是个函数 | `recip(myfield,m,a,b)`<br>`recip(rord(creationDate),1,1000,1000)` |
 | rord | ord 的反转 | `rord(myDateField)` |
