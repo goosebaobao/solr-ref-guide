@@ -75,7 +75,7 @@
 
 则
 
-* `docFreq(fieldX:A) = 2` (A 在 2 个文档里出现)
-* `freq(doc1, fieldX:A) = 4`  (A 在 doc2 里出现 4 次)
-* `totalTermFreq(fieldX:A) = 5`  (A 在所有文档里出现 5 次)
-* `sumTotalTermFreq(fieldX) = 7`  (对于 fieldX，5 个 A，1 个 B，1 个 C)
+* `docFreq(fieldX:A) = 2` A 在 2 个文档里出现
+* `freq(doc2, fieldX:A) = 4`  A 在 doc2 里出现 4 次
+* `totalTermFreq(fieldX:A) = 5`  A 在所有文档里出现 5 次
+* `sumTotalTermFreq(fieldX) = 7`  对于 fieldX，5 个 A，1 个 B，1 个 C
