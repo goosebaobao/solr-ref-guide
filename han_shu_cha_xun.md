@@ -60,13 +60,22 @@
 | sqedist |  |  |
 | sqrt |  |  |
 | strdist |  |  |
-| sub |  |  |
-| sum |  |  |
-| sumtotaltermfreq |  |  |
-| termfreq |  |  |
-| tf |  |  |
-| top |  |  |
+| sub | 减法，sub(x,y) 即为 x - y | `sub(myfield,myfield2)` |
+| sum | 求和，add() 可以作为别名使用 | `sum(x,y,...)` |
+| sumtotaltermfreq | 返回 `totaltermfreq` 之和 | `sttf()` |
+| termfreq | 词条在字段里出现的次数 | `termfreq(text,'memory')` |
+| tf | term frequence，返回一个给定词条的词条频率因子 | `tf(text,'solr')` |
+| top | 貌似是在顶层索引里取值，同一个值在某个段的序号和其在整个索引里的序号是不一样的 | `ord()`，`rord()` 实际是隐含了 `top()` 调用，即 `ord()` 等价于 `top(rod())` |
 | totaltermfreq | 整个索引里，词条在字段里出现的次数 | `ttf(text,'memory')` |
 | xor() | 逻辑异或 | `xor(field1,field2)` field1 ，field2 都为 true 则返回 false，否则返回 true |
 
+有 2 个文档，doc1，doc2，都有字段 fieldX，其中
+* doc1.fieldX = [A B C]
+* doc2.fieldX = [A A A A]
 
+则
+
+* `docFreq(fieldX:A) = 2` (A 在 2 个文档里出现)
+* `freq(doc1, fieldX:A) = 4`  (A 在 doc2 里出现 4 次)
+* `totalTermFreq(fieldX:A) = 5`  (A 在所有文档里出现 5 次)
+* `sumTotalTermFreq(fieldX) = 7`  (对于 fieldX，5 个 A，1 个 B，1 个 C)
