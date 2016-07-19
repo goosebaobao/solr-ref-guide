@@ -35,3 +35,9 @@
 局部参数里的特殊键 `v`，可以用来代替原查询参数，即
 
 `q={!dismax qf=myfield}solr rocks` 等价于 `q={!type=dismax qf=myfield v='solr rocks'}`
+
+## 参数无关
+
+参数无关或间接让你使用另一个参数的值而不是直接引用它（？）
+
+`q={!dismax qf=myfield}solr rocks` 等价于 `q={!type=dismax qf=myfield v=$qq}&qq=solr rocks`
