@@ -16,4 +16,5 @@
        * [在 SolrCloud 里分片和索引数据](zai_solrcloud_li_fen_pian_he_suo_yin_shu_ju.md)
        * 分布式请求
        * 读写侧容错
+   * SolrCloud 配置和参数
 
