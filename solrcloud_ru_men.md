@@ -59,4 +59,11 @@ Please provide a name for your new collection: [gettingstarted]
 $ bin/solr status
 ```
 
-如果在这个过程中，碰到了任何的错误，在 `example/cloud/node1/logs` 和 `example/cloud/node2/logs` 查看 solr 的日志文件
+如果在这个过程中，碰到了任何的错误，在 `example/cloud/node1/logs` 和 `example/cloud/node2/logs` 查看 solr 的日志文件。
+
+可以在 Solr 管理界面的 cloud 面板查看你的 collection 是如何发布到集群的：http://localhost:8983/solr/#/~cloud，Solr 也提供一个健康检查命令来为 collection 执行简单的诊断
+
+```shell
+$ bin/solr healthcheck -c gettingstarted
+```
+
