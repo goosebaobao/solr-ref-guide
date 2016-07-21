@@ -38,3 +38,17 @@ solr start -cloud -s example/cloud/node1/solr -p 8983
 ```
 
 第一个节点将同时启动一个内置的 ZooKeeper，绑定 9983 端口，第一个节点的 solr home 目录为 `example/cloud/node1/solr`，由 `-s` 选项指定
+
+在集群的所有节点都启动后，脚本提示你输入要创建的 collection 的名字
+
+```shell
+Please provide a name for your new collection: [gettingstarted]
+```
+
+默认的名字是 "gettingstarted"，你也可以选择一个更恰当的名字
+
+然后，脚本会提示你这个 collection 跨越的分片的数量。
+
+然后，脚本会提示你每个分片的副本数量。
+
+最后，脚本会提示你的 collection 的配置目录的名字，你可以选择 **basic_configs**，  **data_driven_schema_configs**， 或 **sample_techproducts_configs**
