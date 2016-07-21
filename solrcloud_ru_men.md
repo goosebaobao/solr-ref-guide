@@ -31,3 +31,10 @@ To begin, how many Solr nodes would you like to run in your local cluster? (spec
 Please enter the port for node1 [8983]
 ```
 
+为每个节点选择可用的端口，默认第一个节点是 8983，第二个节点是 7574。脚本将顺序启动各节点，并显示启动服务器的命令，如下
+
+```shell
+solr start -cloud -s example/cloud/node1/solr -p 8983
+```
+
+第一个节点将同时启动一个内置的 ZooKeeper，绑定 9983 端口，第一个节点的 solr home 目录为 `example/cloud/node1/solr`，由 `-s` 选项指定
