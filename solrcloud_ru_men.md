@@ -77,4 +77,29 @@ healthcheck 命令收集 collection 里每个副本的基本信息，例如文�
 $ bin/solr stop -all
  ```
 
-## -noprompt 启动选项
+### -noprompt 启动选项
+
+以默认配置启动 SolrCloud，而不是交互式会话模式
+
+```shell
+$ bin/solr -e cloud -noprompt
+```
+
+### 重启节点
+
+使用 `bin/solr` 脚本重启 SolrCloud 节点，例如，重启端口为 8989 的节点 1 
+
+```shell
+$ bin/solr restart -c -p 8983 -s example/cloud/node1/solr
+```
+
+重启端口为 7574 的节点 2
+
+```shell
+$ bin/solr restart -c -p 7574 -z localhost:9983 -s example/cloud/node2/solr
+```
+
+注意，重启节点 2 时，你需要指定 ZooKeeper 的地址（-z localhost:9983），这样节点 2 才能加入到集群
+
+
+### 向集群添加节点
