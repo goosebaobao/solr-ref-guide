@@ -16,6 +16,7 @@
 
 * 一个集群(cluster)由一个或多个节点(node)组成，每个节点(node)都运行着 Solr 服务进程实例
 * 每个节点(node)可以承载多个核(core)
+* 
 
 A Cluster is made up of one or more Solr Nodes, which are running instances of the Solr server process.
 Each Node can host multiple Cores.
