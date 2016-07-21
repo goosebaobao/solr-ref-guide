@@ -13,4 +13,5 @@
 * [SolrCloud](solrcloud.md)
    * [SolrCloud 入门](solrcloud_ru_men.md)
    * [SolrCloud 如何工作](solrcloud_ru_he_gong_zuo.md)
+       * 在 SolrCloud 里分片和索引数据
 
