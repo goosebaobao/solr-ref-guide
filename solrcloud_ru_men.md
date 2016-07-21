@@ -51,4 +51,4 @@ Please provide a name for your new collection: [gettingstarted]
 
 然后，脚本会提示你每个分片的副本数量。
 
-最后，脚本会提示你的 collection 的配置目录的名字，你可以选择 **basic_configs**，  **data_driven_schema_configs**， 或 **sample_techproducts_configs**
+最后，脚本会提示你的 collection 的配置目录的名字，你可以选择 **basic_configs**，  **data_driven_schema_configs**， 或 **sample_techproducts_configs**。配置目录是从 `server/solr/configsets/` 拉取的，所以你可以事先审核这些配置。如果你要为你的文档定义 schema ，且需要一些灵活性，默认配置 **data_driven_schema_configs** 是很有用的
