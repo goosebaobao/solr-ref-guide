@@ -76,3 +76,5 @@ healthcheck 命令收集 collection 里每个副本的基本信息，例如文�
 ```shell
 $ bin/solr stop -all
  ```
+
+## -noprompt 启动
