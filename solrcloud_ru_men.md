@@ -16,7 +16,7 @@ SolrCloud 设计目标是提供一个高可用，容错的环境，将索引过�
 
 这会启动一个交互式的会话，引导你创建一个使用内置的 ZooKeeper 的、简单的 SolrCloud 集群。脚本询问你想要在本地集群创建几个节点（node），默认是 2 个
 
-```
+```shell
 Welcome to the SolrCloud example!
 
 This interactive session will help you launch a SolrCloud cluster on your local workstation.
