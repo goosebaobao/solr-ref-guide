@@ -59,4 +59,4 @@ Please provide a name for your new collection: [gettingstarted]
 $ bin/solr status
 ```
 
-如果在这个过程中，碰到了任何的错误，在 `example/cloud/node1/logs` 和 `example/cloud/node2/logs` 可以查看 solr 的日志文件
+如果在这个过程中，碰到了任何的错误，在 `example/cloud/node1/logs` 和 `example/cloud/node2/logs` 查看 solr 的日志文件
