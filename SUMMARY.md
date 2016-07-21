@@ -11,6 +11,6 @@
        * [查询中的局部参数](cha_xun_zhong_de_ju_bu_can_shu.md)
        * [其他解析器](qi_ta_jie_xi_qi.md)
 * [SolrCloud](solrcloud.md)
-   * SolrCloud入门
+   * [SolrCloud入门](solrcloud_ru_men.md)
    * SolrCloud 如何工作
 
