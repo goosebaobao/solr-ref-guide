@@ -12,4 +12,5 @@
        * [其他解析器](qi_ta_jie_xi_qi.md)
 * [SolrCloud](solrcloud.md)
    * SolrCloud入门
+   * SolrCloud 如何工作
 
