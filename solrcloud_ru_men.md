@@ -101,5 +101,24 @@ $ bin/solr restart -c -p 7574 -z localhost:9983 -s example/cloud/node2/solr
 
 注意，重启节点 2 时，你需要指定 ZooKeeper 的地址（-z localhost:9983），这样节点 2 才能加入到集群
 
-
 ### 向集群添加节点
+
+向一个已存在的集群添加节点，有一点高级。。。和更多一点对 solr 的理解。当你使用 startup 脚本启动了一个 SolrCloud 集群后，可以用下面的命令添加节点
+
+```
+$ mkdir <solr.home for new solr node>
+$ cp <existing solr.xml path> <new solr.home>
+$ bin/solr start -cloud -s solr.home/solr -p <port num> -z <zk hosts string>
+```
+
+注意，上面的命令需要你创建 solr home 目录，你需要复制 `solr.xml` 到 `solr_home` 目录，或在 ZooKeeper `/solr.xml`
+
+示例如下
+
+```
+$ mkdir -p example/cloud/node3/solr
+$ cp server/solr/solr.xml example/cloud/node3/solr
+$ bin/solr start -cloud -s example/cloud/node3/solr -p 8987 -z localhost:9983
+```
+
+上面的命令将在 8987 端口启动一个 solr 节点，其 home 目录为 `example/cloud/node3/solr`。新的节点将日志文件写入到 `example/cloud/node3/logs`
