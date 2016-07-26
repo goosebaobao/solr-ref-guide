@@ -31,7 +31,9 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 
 另一个用例，客户 "IBM" 有很多文档，你想要把他们分割到多个分片。语法是这样的：  "shard_key/num!document_id"，/num 是用于 hash 的shard_key 的比特位的数量
 
-所以，"IBM/3!12345" 会为 shard_key 占用 3 位，文档 id 占用 29 位。这样就将分片划分为 8 份。如果 num 为 2，那么就是将文档划分为 4 份。查询时，用 `_route_` 参数来指定分片，如 `q=solr&_route_=IBM/3!`
+所以，"IBM/3!12345" 会为 shard_key 占用 3 位，文档 id 占用 29 位。这样就将分片划分为 8 份。如果 num 为 2，那么就是将文档划分为 4 份。
+
+查询时，用 `_route_` 参数来指定分片，如 `q=solr&_route_=IBM/3!`
 
 如果不想影响文档如何存储，就不要在文档 id 里指定前缀
 
