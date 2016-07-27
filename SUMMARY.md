@@ -14,7 +14,7 @@
    * [SolrCloud 入门](solrcloud_ru_men.md)
    * [SolrCloud 如何工作](solrcloud_ru_he_gong_zuo.md)
        * [在 SolrCloud 里分片和索引数据](zai_solrcloud_li_fen_pian_he_suo_yin_shu_ju.md)
-       * 分布式请求
+       * [分布式请求](fen_bu_shi_qing_qiu.md)
        * 读写侧容错
    * SolrCloud 配置和参数
 
