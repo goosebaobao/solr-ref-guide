@@ -76,3 +76,15 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 </updateRequestProcessorChain>
 ```
 
+最后，你也可以配置为忽略优化，让提交通过
+
+```xml
+<updateRequestProcessorChain name="ignore-optimize-only-from-client-403">
+  <processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
+    <str name="responseMessage">Thou shall not issue an optimize, but commits are OK!</str>
+    <bool name="ignoreOptimizeOnly">true</bool>
+  </processor>
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateRequestProcessorChain>
+```
+
