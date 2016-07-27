@@ -62,5 +62,17 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 
 如上面的例子，处理器返回 200 给客户端，但是会忽略提交/优化请求。注意你需要把 SolrCloud 必需的隐含处理器串联起来，毕竟这个自定义的处理器链会取代默认的处理器链
 
+下面的例子会抛出一个代码为 403 的异常，及定制的错误消息
 
+```xml
+<updateRequestProcessorChain name="ignore-commit-from-client" default="true">
+  <processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
+    <int name="statusCode">403</int>
+    <str name="responseMessage">Thou shall not issue a commit!</str>
+  </processor>
+  <processor class="solr.LogUpdateProcessorFactory" />
+  <processor class="solr.DistributedUpdateProcessorFactory" />
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateRequestProcessorChain>
+```
 
