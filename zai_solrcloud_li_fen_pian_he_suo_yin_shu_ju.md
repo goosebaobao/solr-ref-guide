@@ -51,12 +51,12 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 
 ```xml
 <updateRequestProcessorChain name="ignore-commit-from-client" default="true">
-<processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
-<int name="statusCode">200</int>
-</processor>
-<processor class="solr.LogUpdateProcessorFactory" />
-<processor class="solr.DistributedUpdateProcessorFactory" />
-<processor class="solr.RunUpdateProcessorFactory" />
+  <processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
+    <int name="statusCode">200</int>
+  </processor>
+  <processor class="solr.LogUpdateProcessorFactory" />
+  <processor class="solr.DistributedUpdateProcessorFactory" />
+  <processor class="solr.RunUpdateProcessorFactory" />
 </updateRequestProcessorChain>
 ```
 
