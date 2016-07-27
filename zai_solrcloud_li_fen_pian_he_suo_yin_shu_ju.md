@@ -88,3 +88,5 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 </updateRequestProcessorChain>
 ```
 
+## 分布式请求
+
