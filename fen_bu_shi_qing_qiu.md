@@ -23,3 +23,5 @@ http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1
 ```
 http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1,shard2
 ```
+
+在上面的例子里，分片 id 用来选择该分片的一个随机的副本
