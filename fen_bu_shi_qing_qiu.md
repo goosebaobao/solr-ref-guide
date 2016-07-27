@@ -4,3 +4,22 @@
 
 ## 限制哪些分片(shards)被查询
 
+使用 SolrCloud 的一个好处是，多个分片组成的大集合，但在某些案例里，你只对分片的子集返回的结果感兴趣。你可以选择查询所有还是部分分片。
+
+在集合的所有分片上查询，看上去眼熟，仿佛是 SolrCloud 从来不会
+
+```
+http://localhost:8983/solr/gettingstarted/select?q=*:*
+```
+
+另一方面，如果你想只在一个分片上搜索，你可以指定分片的逻辑 id，如
+
+```
+http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1
+```
+
+如果想在一组分片上搜索，可以一起指定
+
+```
+http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1,shard2
+```
