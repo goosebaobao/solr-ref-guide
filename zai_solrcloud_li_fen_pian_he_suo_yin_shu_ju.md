@@ -45,4 +45,18 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 
 分片要使用 Collection API，当前允许将 1 个分片切分为 2 份。已存在的分片依然保留，所以这个切分动作实际上是创建了 2 个副本作为分片。当你准备好时，可以删除老的分片。
 
+## 忽略客户端提交
+
+大多数场景下，在运行 SolrCloud 时，索引客户端不应发送明确的提交请求。相反的，应该用 `openSearcher=false` 配置自动提交，自动软提交，以使最新的更新能在查询中可见。这能确保在及群里自动提交是按预定计划发生的。为了强调客户端不应该明确提交的策略，应该更新所有索引数据到 SolrCloud 的客户端。不过这并非总是可行的，所以 Solr 提供了 IgnoreCommitOptimizeUpdateProcessorFactory，允许你忽略明确的提交，并且/或者优化客户端请求而不需要重构客户端代码。要激活这个请求处理器，你需要将下面内容添加到 solrconfig.xml
+
+```xml
+<updateRequestProcessorChain name="ignore-commit-from-client" default="true">
+<processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
+<int name="statusCode">200</int>
+</processor>
+<processor class="solr.LogUpdateProcessorFactory" />
+<processor class="solr.DistributedUpdateProcessorFactory" />
+<processor class="solr.RunUpdateProcessorFactory" />
+</updateRequestProcessorChain>
+```
 
