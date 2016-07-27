@@ -6,7 +6,7 @@
 
 使用 SolrCloud 的一个好处是，多个分片组成的大集合，但在某些案例里，你只对分片的子集返回的结果感兴趣。你可以选择查询所有还是部分分片。
 
-在集合的所有分片上查询，看上去眼熟，仿佛是 SolrCloud 从来不会
+在集合的所有分片上查询，看上去眼熟，就好像没有运行 SolrCloud（意思是在所有分片上查询的语法和单核）
 
 ```
 http://localhost:8983/solr/gettingstarted/select?q=*:*
@@ -40,7 +40,7 @@ http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=localhost:7574/sol
 ttingstarted|localhost:7500/solr/gettingstarted
 ```
 
-当然，你可以可以指定一个逗号分隔的分片列表，每一个都由管道符(|)分隔多个副本，下面例子里，2 个分片被查询，第一个分片是随机选择的副本，第二个分片是在管道符(|)限定的副本里随机一个
+当然，你可以指定一个逗号分隔的分片列表，每一个都由管道符(|)分隔多个副本，下面例子里，2 个分片被查询，第一个分片是随机选择的副本，第二个分片是在管道符(|)限定的副本里随机一个
 
 ```
 http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1,localhost:7574/
