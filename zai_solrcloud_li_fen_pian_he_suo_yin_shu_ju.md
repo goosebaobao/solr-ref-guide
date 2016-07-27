@@ -60,3 +60,7 @@ SolrCloud 解决了这些问题。它支持分布式索引和查询，ZooKeeper 
 </updateRequestProcessorChain>
 ```
 
+如上面的例子，处理器返回 200 给客户端，但是会忽略提交/优化请求。注意你需要把 SolrCloud 必需的隐含处理器串联起来，毕竟这个自定义的处理器链会取代默认的处理器链
+
+
+
