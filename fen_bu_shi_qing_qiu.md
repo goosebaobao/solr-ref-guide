@@ -46,3 +46,19 @@ ttingstarted|localhost:7500/solr/gettingstarted
 http://localhost:8983/solr/gettingstarted/select?q=*:*&shards=shard1,localhost:7574/
 solr/gettingstarted|localhost:7500/solr/gettingstarted
 ```
+
+## 配置 ShardHandlerFactory
+
+你可以在 Solr 分布式查询里配置并发和线程池，更好的细粒度控制和调整，默认的配置有利于吞吐量。
+
+配置标准的处理器(handler)，在 solrconfig.xml 里按如下例子配置
+
+```xml
+<requestHandler name="standard" class="solr.SearchHandler" default="true">
+  <!-- other params go here -->
+  <shardHandler class="HttpShardHandlerFactory">
+    <int name="socketTimeOut">1000</int>
+    <int name="connTimeOut">5000</int>
+  </shardHandler>
+</requestHandler>
+```
