@@ -70,10 +70,10 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 | `socketTimeout` | 0 (使用操作系统默认值) | socket 等待的时间，毫秒 |
 | `connTimeout` | 0 (使用操作系统默认值) | 接受绑定或连接 socket 的时间，毫秒 |
 | `maxConnectionsPerHost` | 20 | 分布式查询时每个分片最大的并发连接数 |
-| `maxConnections` | 10000 |  |
-| `corePoolSize` | 0 |  |
-| `maximumPoolSize` | Integer.MAX_VALUE |  |
-| `maxThreadIdleTime` | 5s |  |
-| `sizeOfQueue` | -1 |  |
-| `fairnessPolicy` | false |  |
+| `maxConnections` | 10000 | 分布式查询时总的并发连接上限数 |
+| `corePoolSize` | 0 | 分布式查询时线程数下限 |
+| `maximumPoolSize` | Integer.MAX_VALUE | 分布式查询时线程数最大值 |
+| `maxThreadIdleTime` | 5 | 线程在回收前等待的时间，秒 |
+| `sizeOfQueue` | -1 | 如果指定，线程池将用一个队列来替代直接切换缓冲区。高吞吐量的系统设为 -1 来使用直接切换缓冲区，希望更好的延迟的系统配置一个合理的队列大小来处理变化的请求 |
+| `fairnessPolicy` | false | 为 true，则分布式查询使用先进先出方式来消费，false 则吞吐量是延迟处理 |
 
