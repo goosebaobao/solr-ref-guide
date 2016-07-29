@@ -63,3 +63,17 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 </requestHandler>
 ```
 
+可用的参数列表
+
+| 参数 | 默认值 | 含义 |
+| -- | -- | -- |
+| `socketTimeout` | 0 (使用操作系统默认值) |  |
+| `connTimeout` | 0 (使用操作系统默认值) |  |
+| `maxConnectionsPerHost` | 20 |  |
+| `maxConnections` | 10000 |  |
+| `corePoolSize` | 0 |  |
+| `maximumPoolSize` | Integer.MAX_VALUE |  |
+| `maxThreadIdleTime` | 5s |  |
+| `sizeOfQueue` | -1 |  |
+| `fairnessPolicy` | false |  |
+
