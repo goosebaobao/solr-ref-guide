@@ -79,5 +79,5 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 
 ## 配置 statsCache(分布式 IDF)
 
-
+为计算关联度（匹配度？）需要统计文档和词条。
 
