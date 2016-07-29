@@ -67,9 +67,9 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 
 | 参数 | 默认值 | 含义 |
 | -- | -- | -- |
-| `socketTimeout` | 0 (使用操作系统默认值) |  |
-| `connTimeout` | 0 (使用操作系统默认值) |  |
-| `maxConnectionsPerHost` | 20 |  |
+| `socketTimeout` | 0 (使用操作系统默认值) | socket 等待的时间，毫秒 |
+| `connTimeout` | 0 (使用操作系统默认值) | 接受绑定或连接 socket 的时间，毫秒 |
+| `maxConnectionsPerHost` | 20 | 分布式查询时每个分片最大的并发连接数 |
 | `maxConnections` | 10000 |  |
 | `corePoolSize` | 0 |  |
 | `maximumPoolSize` | Integer.MAX_VALUE |  |
