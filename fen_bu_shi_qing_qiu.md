@@ -62,3 +62,4 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
   </shardHandler>
 </requestHandler>
 ```
+
