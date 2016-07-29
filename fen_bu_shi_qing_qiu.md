@@ -77,3 +77,7 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 | `sizeOfQueue` | -1 | 如果指定，线程池将用一个队列来替代直接切换缓冲区。高吞吐量的系统设为 -1 来使用直接切换缓冲区，希望更好的延迟的系统配置一个合理的队列大小来处理变化的请求 |
 | `fairnessPolicy` | false | 为 true，则分布式查询使用先进先出方式来消费，false 则吞吐量是延迟处理 |
 
+## 配置 statsCache(分布式 IDF)
+
+
+
