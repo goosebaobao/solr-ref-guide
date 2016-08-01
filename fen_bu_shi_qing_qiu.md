@@ -86,3 +86,9 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 * `ExactSharedStatsCache`：和 ExactStatsCache 一样，但是相同词条的后续请求不被统计
 * `LRUStatsCache`：用一个 LRU(Least Recently Used，最近最少使用) 算法的 cache 来保存全局统计
 
+在 `solrconfig.xml` 文件里，使用 `<statsCache>` 标签来配置。示例：
+
+```xml
+<statsCache class="org.apache.solr.search.stats.ExactStatsCache"/>
+```
+
