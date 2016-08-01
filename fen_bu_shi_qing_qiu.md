@@ -92,3 +92,5 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 <statsCache class="org.apache.solr.search.stats.ExactStatsCache"/>
 ```
 
+## 避免分布式死锁
+
