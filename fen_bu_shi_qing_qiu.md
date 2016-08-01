@@ -84,5 +84,5 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 * `LocalStatsCache`：只用局部词条和文档来统计关联度。对于分片上的统一术语，这个很不错
 * `ExactStatsCache`：使用全局值来统计文档频率
 * `ExactSharedStatsCache`：和 ExactStatsCache 一样，但是相同词条的后续请求不被统计
-* `LRUStatsCache`
+* `LRUStatsCache`：用一个 LRU(Least Recently Used，最近最少使用) 算法的 cache 来保存全局统计
 
