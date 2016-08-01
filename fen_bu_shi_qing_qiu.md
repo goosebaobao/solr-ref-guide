@@ -81,8 +81,8 @@ solr/gettingstarted|localhost:7500/solr/gettingstarted
 
 为计算关联度（匹配度？）需要统计文档和词条。Solr 提供 4 种开箱即用的实现
 
-* `LocalStatsCache`
-* `ExactStatsCache`
-* `ExactSharedStatsCache`
+* `LocalStatsCache`：只用局部词条和文档来统计关联度。对于分片上的统一术语，这个很不错
+* `ExactStatsCache`：使用全局值来统计文档频率
+* `ExactSharedStatsCache`：和 ExactStatsCache 一样，但是相同词条的后续请求不被统计
 * `LRUStatsCache`
 
