@@ -10,7 +10,7 @@ Solr 提供了一个 Java 的客户端 [CloudSolrClient](http://lucene.apache.or
 
 ### *zkConnected*
 
-
+一个 Solr 节点会在它能联系到每个分片的至少一个副本时返回查询结果，甚至是在它收到请求时无法联系到 ZooKeeper。为了容错这通常是优先的做法，但是可能会得到错误的结果或者脏数据，如果整个集合的结构发生了大的变化而该节点还没有能从 ZooKeeper 得到通知。例如，新增或移除了分片，或者某个分片切分成子分片
 
 ### *shards.tolerant*
 
