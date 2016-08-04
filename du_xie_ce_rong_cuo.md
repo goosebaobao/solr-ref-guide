@@ -57,6 +57,8 @@ Solr 提供了一个 Java 的客户端 [CloudSolrClient](http://lucene.apache.or
 
 ## 写容错
 
+SolrCloud 被设计为复制文档来确保数据的冗余，并允许发送更新请求到集群内任何节点。节点会判断它是否承载了分片的领导(leader)，如果没有的话会转发请求给领导(leader)，领导会转发请求到所有存在的副本，使用版本控制来确保所有副本都有最新的版本。如果领导(leader)宕机，某个其他副本会取代它。这个架构保证你的数据能在灾难时恢复，即使你在使用近实时搜索。
+
 ### *Recovery*
 
 ### *Achieved Replication Factor*
