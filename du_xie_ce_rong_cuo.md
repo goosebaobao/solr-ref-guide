@@ -34,6 +34,27 @@ Solr 提供了一个 Java 的客户端 [CloudSolrClient](http://lucene.apache.or
 
 ### *shards.tolerant*
 
+如果一个或多个分片不可用，Solr 默认的行为是请求失败。但是，很多场景部分结果是可接受的，所以 Solr 提供一个逻辑参数 `shards.tolerant` (默认`false`)。如果 `shards.tolerant=true`，会返回部分结果。如果返回的结果不包含所有分片，返回头里有一个特殊的标识 `partialResults`。客户端可以同时指定 `shards.info` 参数来获取更多的细节
+
+```json
+{
+  "responseHeader": {
+    "status": 0,
+    "zkConnected": true,
+    "partialResults": true,
+    "QTime": 20,
+    "params": {
+      "q": "*:*"
+    }
+  },
+  "response": {
+    "numFound": 77,
+    "start": 0,
+    "docs": [ ... ]
+  }
+}
+```
+
 ## 写容错
 
 ### *Recovery*
