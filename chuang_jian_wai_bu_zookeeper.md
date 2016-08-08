@@ -76,6 +76,25 @@ bin/solr start -cloud -s <path to solr home for new node> -p 8987 -z localhost:2
 
 ## 安装配置 ZooKeeper 集群
 
+对于集群来说，只需要比单个 zk 更加小心一些
 
+不同之处在于，你需要首先配置多个 zk 互相认知和交谈。所以你的 `zoo.cfg` 看上去是这样滴
 
+```ini
+clientPort=2181
+initLimit=5
+syncLimit=2
+dataDir=/var/lib/zookeeperdata/1
+server.1=localhost:2888:3888
+server.2=localhost:2889:3889
+server.3=localhost:2890:3890
+```
+
+这里有 3 个新的参数
+
+**initLimit**：
+
+**syncLimit**：
+
+**server.X**：
 
