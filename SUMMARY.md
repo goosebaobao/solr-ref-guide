@@ -17,4 +17,5 @@
        * [分布式请求](fen_bu_shi_qing_qiu.md)
        * [读写侧容错](du_xie_ce_rong_cuo.md)
    * [SolrCloud 配置和参数](solrcloud_pei_zhi_he_can_shu.md)
+       * 创建外部 ZooKeeper
 
