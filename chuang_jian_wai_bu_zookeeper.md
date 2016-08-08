@@ -62,7 +62,7 @@ zk 提供了其他很多强大的配置，但是深入研究这些内容已超�
 bin/solr start -e cloud -z localhost:2181 -noprompt
 ```
 
-添加一个节点
+添加一个指向 2181 端口的 zk 的节点
 
 ```
 bin/solr start -cloud -s <path to solr home for new node> -p 8987 -z localhost:2181
