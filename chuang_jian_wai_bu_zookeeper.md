@@ -70,6 +70,10 @@ bin/solr start -cloud -s <path to solr home for new node> -p 8987 -z localhost:2
 
 注意：当你不是在启动一个 solr 示例，确保在创建集合前已将配置上传到 zk
 
+### 关闭 ZooKeeper
+
+
+
 
 
 
