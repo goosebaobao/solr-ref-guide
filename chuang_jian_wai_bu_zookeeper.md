@@ -74,6 +74,8 @@ bin/solr start -cloud -s <path to solr home for new node> -p 8987 -z localhost:2
 
 要关闭 zk，使用 stop 命令来运行 zkServer：`zkServer.sh stop`
 
+## 安装配置 ZooKeeper 集群
+
 
 
 
