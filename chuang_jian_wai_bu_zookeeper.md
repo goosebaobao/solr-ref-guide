@@ -96,7 +96,49 @@ server.3=localhost:2890:3890
 
 **syncLimit**：以 tick 为单位，follower 与 zk 同步数据的时间。如果 follower 离 leader 太远，将会被剔除。这个貌似是 leader 与 follower 之间的心跳检测超时时间，心跳是 leader 主动发送给 follower 的。
 
-**server.X**：集群里的所有服务器的 id 和位置信息。Server ID 必须额外的保存在 ` <dataDir>/myid` 文件里，且在每个 zk 实例的 `dataDir` 目录下。ID 用来标识每个服务器，在本例中，第一个实例应该有 `/var/lib/zookeeperdata/1/myid` 文件，内容为 '1'
+**server.X**：集群里的所有服务器的 id 和位置信息。Server ID 必须额外的保存在 ` <dataDir>/myid` 文件里，且在每个 zk 实例的 `dataDir` 目录下。ID 用来标识每个服务器，在本例中，第一个实例应该有 `/var/lib/zookeeperdata/1/myid` 文件，内容为 '1'。右边可以配置两个端口，第一个端口用于F和L之间的数据同步和其它通信，第二个端口用于Leader选举过程中投票通信。 
 
+现在，随同 solr 你需要创建全新的目录来运行多个实例，为了一个 zk 实例你所要做的所有工作，即便是为了测试而运行在同一个机器，就是一个新的配置文件。为了完成这个例子，你将创建 2 个配置文件
 
+`<ZOOKEEPER_HOME>/conf/zoo2.cfg` 内容如下
 
+```ini
+tickTime=2000
+dataDir=c:/sw/zookeeperdata/2
+clientPort=2182
+initLimit=5
+syncLimit=2
+server.1=localhost:2888:3888
+server.2=localhost:2889:3889
+server.3=localhost:2890:3890
+```
+
+你还需要创建 `<ZOOKEEPER_HOME>/conf/zoo3.cfg`
+
+```ini
+tickTime=2000
+dataDir=c:/sw/zookeeperdata/3
+clientPort=2183
+initLimit=5
+syncLimit=2
+server.1=localhost:2888:3888
+server.2=localhost:2889:3889
+server.3=localhost:2890:3890
+```
+
+最终，在每个 `dataDir` 目录创建你的 `myid` 文件，以便每个服务器都知道自己是哪个实例。`myid` 文件里的 id 必须匹配 'server.X' 的定义。这样，上例中的 zk 实例(或机器) 'server.1'，应该有一个 `myid` 文件包含了内容 1。`myid` 文件可以是任意的 1 至 255 之间的整数，且必须匹配 `zoo.cfg` 文件里分配的服务器 ID。
+
+要启动服务，如下引用配置文件
+
+```
+cd <ZOOKEEPER_HOME>
+bin/zkServer.sh start zoo.cfg
+bin/zkServer.sh start zoo2.cfg
+bin/zkServer.sh start zoo3.cfg
+```
+
+一旦这些服务器启动，就可以在 solr 里引用他们
+
+```
+bin/solr start -e cloud -z localhost:2181,localhost:2182,localhost:2183 -noprompt
+```
