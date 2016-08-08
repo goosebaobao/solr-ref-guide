@@ -142,3 +142,7 @@ bin/zkServer.sh start zoo3.cfg
 ```
 bin/solr start -e cloud -z localhost:2181,localhost:2182,localhost:2183 -noprompt
 ```
+
+## ZooKeeper 连接安全
+
+你也许想要保证 Solr 和 ZooKeeper 之间的通信安全，参考 ACL(ZooKeeper Access Control)
