@@ -92,9 +92,11 @@ server.3=localhost:2890:3890
 
 这里有 3 个新的参数
 
-**initLimit**：
+**initLimit**：以 tick 为单位，follower 连接到 leader 并同步数据的时间。本例里，是 5 个 tick，每个 2000 毫秒，所以服务器将等待 10 秒连接到 leader 并同步。
 
-**syncLimit**：
+**syncLimit**：以 tick 为单位，follower 与 zk 同步数据的时间。如果 follower 离 leader 太远，将会被剔除。这个貌似是 leader 与 follower 之间的心跳检测超时时间，心跳是 leader 主动发送给 follower 的。
 
-**server.X**：
+**server.X**：集群里的所有服务器的 id 和位置信息。Server ID 必须额外的保存在 ` <dataDir>/myid` 文件里，且在每个 zk 实例的 `dataDir` 目录下。ID 用来标识每个服务器，在本例中，第一个实例应该有 `/var/lib/zookeeperdata/1/myid` 文件，内容为 '1'
+
+
 
