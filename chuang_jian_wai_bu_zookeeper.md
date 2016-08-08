@@ -46,6 +46,28 @@ clientPort=2181
 
 一旦这个文件就绪，你就已准备好启动 zk 实例了。
 
+### 运行实例
+
+使用 `ZOOKEEPER_HOME/bin/zkServer.sh` 脚本来运行 zk 实例，命令为 `zkServer.sh start`
+
+zk 提供了其他很多强大的配置，但是深入研究这些内容已超出了这个说明的范围。对于本文的示例，默认的配置已足够好了。
+
+### 在 Solr 中使用 zk 实例
+
+在 Solr 里使用 zk 实例很简单：在 bin/solr 脚本使用 `-z` 参数。例如，要在 solr 里指向 你启动在 2181 端口的 zk，只需如此
+
+随同已运行在 2181 端口的 zk 启动 `cloud` 例子(其他均为默认选项)
+
+```shell
+bin/solr start -e cloud -z localhost:2181 -noprompt
+```
+
+添加一个节点
+
+```
+bin/solr start -cloud -s <path to solr home for new node> -p 8987 -z localhost:2181
+```
+
 
 
 
