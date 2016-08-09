@@ -28,3 +28,4 @@ create 命令会上传 `data_driven_schema_configs` 配置目录的一个副本�
 
 > 最好是将这些文件置于版本控制之下
 
+## 用 zkcli 或 SolrJ 更新配置
