@@ -50,5 +50,13 @@ $ sh zkcli.sh -cmd upconfig -zkhost <host:port> -confname <name for configset> -
 
 ## 在第一个集群启动前准备 ZooKeeper
 
+如果你要和其他应用程序共享一个 zk 实例，你应该使用 *chroot*。
 
+集群需要配置，且部分配置对集群的正常工作是关键性的，你应该在第一次启动 Solr 集群之前就把这些配置上传到 zk。例如如下的配置文件(不限于) `solr.xml`，`security.json`，`clusterprops.json`
+
+例如，你要把 `solr.xml` 保存到 zk 以避免将其复制到每个节点的 `solr_home` 目录，你可以用 `zkcli.sh` 工具来推送它到 zk
+
+```
+zkcli.sh -zkhost localhost:2181 -cmd putfile /solr.xml /path/to/solr.xml
+```
 
