@@ -25,3 +25,6 @@ $ bin/solr create -c mycollection -d data_driven_schema_configs
 create 命令会上传 `data_driven_schema_configs` 配置目录的一个副本到 zk 的 `/configs/mycollection`
 
 一旦一个配置目录被上传到 zk，你就可以用 zkCLI( ZooKeeper Command Line Interface ) 来更新它们。
+
+> 最好是将这些文件置于版本控制之下
+
