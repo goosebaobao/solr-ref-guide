@@ -38,3 +38,15 @@ create 命令会上传 `data_driven_schema_configs` 配置目录的一个副本�
 $ sh zkcli.sh -cmd upconfig -zkhost <host:port> -confname <name for configset> -solrhome <solrhome> -confdir <path to directory with configset>
 ```
 
+## 管理 SolrCloud 配置文件
+
+要更新或更换 SolrCloud 配置文件
+
+1. 从 zk 下载最新的配置文件，使用源码控制的检出
+2. 进行变更
+3. 提交更新后的文件到源码控制
+4. 将变更推送到 zk
+5. 重载集合(collection)以使变更生效
+
+
+
