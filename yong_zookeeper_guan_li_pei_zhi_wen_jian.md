@@ -48,5 +48,7 @@ $ sh zkcli.sh -cmd upconfig -zkhost <host:port> -confname <name for configset> -
 4. 将变更推送到 zk
 5. 重载集合(collection)以使变更生效
 
+## 在第一个集群启动前准备 ZooKeeper
+
 
 
