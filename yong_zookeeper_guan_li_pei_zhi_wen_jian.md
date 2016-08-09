@@ -30,5 +30,11 @@ create 命令会上传 `data_driven_schema_configs` 配置目录的一个副本�
 
 ## 用 zkcli 或 SolrJ 上传配置
 
-在生产环境，也可以用 solr 的 zkcli.sh 脚本，或者 java 方法 CloudSlorClient.updataConfig()
+在生产环境，也可以用 solr 的 zkcli.sh 脚本，或者 java 方法 CloudSlorClient.updataConfig() 上传配置
+
+下面的命令使用 zkcli 脚本上传一个新的配置
+
+```
+$ sh zkcli.sh -cmd upconfig -zkhost <host:port> -confname <name for configset> -solrhome <solrhome> -confdir <path to directory with configset>
+```
 
