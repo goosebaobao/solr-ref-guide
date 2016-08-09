@@ -19,4 +19,5 @@
    * [SolrCloud 配置和参数](solrcloud_pei_zhi_he_can_shu.md)
        * [创建外部 ZooKeeper](chuang_jian_wai_bu_zookeeper.md)
        * [用 ZooKeeper 管理配置文件](yong_zookeeper_guan_li_pei_zhi_wen_jian.md)
+       * ZooKeeper 访问控制
 
