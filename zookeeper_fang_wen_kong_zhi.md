@@ -71,6 +71,5 @@ Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用�
 * `org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider`: 它让你用系统属性来自定义证书。它支持最多一组证书
  * schema 为 "digest". 用户名和密码由系统变量 "`zkDigestUsername`" and "`zkDigestPassword`" 分别定义。如果用户名和密码都提供的话，这组证书通过 `getCredentials()` 方法返回。
  * 如果上述这组证书没有返回，将会使用默认的行为返回一个空列表，即 `DefaultZkCredentialsProvider`
-.
 
 ### 控制 ACLs
