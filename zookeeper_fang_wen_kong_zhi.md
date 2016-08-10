@@ -104,3 +104,10 @@ public interface ZkACLProvider {
 
     如果上述的 ACLs 都没有添加到列表，那么 `DefaultZkACLProvider` 的空 ACL 列表将作为默认值
 
+注意系统属性名和证书提供者 `VMParamsSingleSetCredentialsDigestZkCredentialsProvider` 重名了。这是为了让这 2 个提供者以一种可能的方式协作：我们总是用 2 种限制来保护对内容的访问——一个管理员用户和一个只读的用户，同时我们总是用这个管理员用户连接到 zk，这样我们就可以在内容和 我们自己创建的 znode 上做任何事了
+
+你可以将只读证书授予 SolrCloud 集群的客户，例如 SolrJ 客户端。它们将能够读取任何需要的内容，但不能修改任何内容。
+
+
+
+
