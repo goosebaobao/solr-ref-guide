@@ -108,6 +108,8 @@ public interface ZkACLProvider {
 
 你可以将只读证书授予 SolrCloud 集群的客户，例如 SolrJ 客户端。它们将能够读取任何需要的内容，但不能修改任何内容。
 
+### 变更 ACL Schemes
+
 
 
 
