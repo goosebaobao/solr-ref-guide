@@ -68,10 +68,8 @@ Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用�
 你可以自己实现，但 Solr 提供了 2 个实现
 
 * `org.apache.solr.common.cloud.DefaultZkCredentialsProvider`: 它的 `getCredentials()` 方法返回一个空的 list，表示没有可用的证书。如果没有在 `solr.xml` 里配置提供者，默认就是这个
-* `org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider`: This lets you define your credentials using system properties. It supports at most one set of
-credentials.
- * The schema is "digest". The username and password are defined by system properties "zkDiges
-tUsername" and "zkDigestPassword", respectively. This set of credentials will be added
+* `org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider`: 它让你用系统属性来自定义证书。它支持最多一组证书
+ * schema 为 "digest". 用户名和密码由系统变量 "`zkDigestUsername`" and "`zkDigestPassword`" 分别定义。. This set of credentials will be added
 to the list of credentials returned by getCredentials() if both username and password are provided.
  * If the one set of credentials above is not added to the list, this implementation will fall back to default behavior and use the (empty) credentials list from DefaultZkCredentialsProvider
 .
