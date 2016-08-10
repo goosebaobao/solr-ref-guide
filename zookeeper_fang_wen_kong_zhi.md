@@ -41,15 +41,15 @@ Solr 节点，客户端，工具(如 ZkCLI)总是使用 java 类 SolrZkClient �
 
 ```java
 package org.apache.solr.common.cloud;
-  public interface ZkCredentialsProvider {
-    public class ZkCredentials {
-      String scheme;
-      byte[] auth;
-      public ZkCredentials(String scheme, byte[] auth) {
-        super();
-        this.scheme = scheme;
-        this.auth = auth;
-      }
+public interface ZkCredentialsProvider {
+  public class ZkCredentials {
+    String scheme;
+    byte[] auth;
+    public ZkCredentials(String scheme, byte[] auth) {
+      super();
+      this.scheme = scheme;
+      this.auth = auth;
+    }
     String getScheme() {
       return scheme;
     }
@@ -60,3 +60,5 @@ package org.apache.solr.common.cloud;
   Collection<ZkCredentials> getCredentials();
 }
 ```
+
+Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用哪个证书。如果未配置提供者，会使用默认的实现，`DefaultZkCredentialsProvider` 
