@@ -41,6 +41,7 @@ Solr 节点，客户端，工具(如 ZkCLI)总是使用 java 类 SolrZkClient �
 
 ```java
 package org.apache.solr.common.cloud;
+
 public interface ZkCredentialsProvider {
   public class ZkCredentials {
     String scheme;
@@ -73,4 +74,14 @@ Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用�
  * 如果上述这组证书没有返回，将会使用默认的行为返回一个空列表，即 `DefaultZkCredentialsProvider`
 
 ### 控制 ACLs
+
+在 `solr.xml` 的 `<solrcloud>` 节使用 `zkACLProvider` 属性来指定类名字或类路径以控制哪些 ACLs 将被添加，类需要实现下面的接口
+
+```java
+package org.apache.solr.common.cloud;
+
+public interface ZkACLProvider {
+  List<ACL> getACLsToAdd(String zNodePath);
+}
+```
 
