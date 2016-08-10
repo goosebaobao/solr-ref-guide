@@ -62,3 +62,20 @@ public interface ZkCredentialsProvider {
 ```
 
 Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用哪个证书。如果未配置提供者，会使用默认的实现，`DefaultZkCredentialsProvider` 
+
+#### 开箱即用的实现
+
+你可以自己实现，但 Solr 提供了 2 个实现
+
+* `org.apache.solr.common.cloud.DefaultZkCredentialsProvider`: Its getCredentials()
+returns a list of length zero, or "no credentials used". This is the default and is used if you do not configure
+a provider in solr.xml.
+* `org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider`: This lets you define your credentials using system properties. It supports at most one set of
+credentials.
+ * The schema is "digest". The username and password are defined by system properties "zkDiges
+tUsername" and "zkDigestPassword", respectively. This set of credentials will be added
+to the list of credentials returned by getCredentials() if both username and password are provided.
+ * If the one set of credentials above is not added to the list, this implementation will fall back to default behavior and use the (empty) credentials list from DefaultZkCredentialsProvider
+.
+
+### 控制 ACLs
