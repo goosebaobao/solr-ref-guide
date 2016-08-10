@@ -91,14 +91,12 @@ public interface ZkACLProvider {
 
 你可以自己实现，但 Solr 附带了
 
-* `org.apache.solr.common.cloud.DefaultZkACLProvider`: It returns a list of length one for all zNodePath-s. The single ACL entry in the list is "open-unsafe". This is the default and is used if you do not configure a provider in solr.xml.
-* `org.apache.solr.common.cloud.VMParamsAllAndReadonlyDigestZkACLProvider`: This lets you define your ACLs using system properties. Its getACLsToAdd() implementation does not use zNodePath for anything, so all znodes will get the same set of ACLs. It supports adding one or both of these
-options:
- * A user that is allowed to do everything. 
-   * The permission is "ALL" (corresponding to all of CREATE, READ, WRITE, DELETE, and ADMIN), and the schema is "digest". 
-   * The username and password are defined by system properties "zkDigestUsername" and "
-zkDigestPassword", respectively. 
-   * This ACL will not be added to the list of ACLs unless both username and password are provided.
+* `org.apache.solr.common.cloud.DefaultZkACLProvider`: 返回只有一个元素的列表：`zNodePath`。这个唯一的 ACL 记录 是开放且不安全的。如果未在 `solr.xml` 里配置提供者，这就是默认值
+* `org.apache.solr.common.cloud.VMParamsAllAndReadonlyDigestZkACLProvider`: 让你用户系统属性自定义 ACLs。它的 `getACLsToAdd()` 实现不使用 `zNodePath`, 所以所有的 znode 得到相同的 ACLs，可添加如下的选项
+ * 可以做任何事的用户 
+   * 权限为 "`ALL`" (相当于所有的 `CREATE`, `READ`, `WRITE`, `DELETE`, `ADMIN`)，且 schema 为 "digest"
+   * 用户名和密码分别用系统属性 "`zkDigestUsername`" 和 "`zkDigestPassword`" 定义
+   * 除非用户名和密码都提供，否则该 ACL 不会被添加到 ACLs 里
   * A user that is only allowed to perform read operations. 
    * The permission is "READ" and the schema is "digest". 
    * The username and password are defined by system properties "zkDigestReadonlyUsern
@@ -106,5 +104,4 @@ ame" and "zkDigestReadonlyPassword, respectively.
    * This ACL will not be added to the list of ACLs unless both username and password are provided.
       
    If neither of the above ACLs is added to the list, the (empty) ACL list of DefaultZkACLProvider will be used by default.
-   
-   
+
