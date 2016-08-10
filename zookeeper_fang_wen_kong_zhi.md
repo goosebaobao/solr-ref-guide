@@ -66,7 +66,7 @@ Solr 调用给定的证书提供者的 `getCredentials()` 方法来决定使用�
 
 #### 开箱即用的实现
 
-你可以自己实现，但 Solr 提供了 2 个实现
+你可以自己实现，但 Solr 附带了 2 个实现
 
 * `org.apache.solr.common.cloud.DefaultZkCredentialsProvider`: 它的 `getCredentials()` 方法返回一个空的 list，表示没有可用的证书。如果没有在 `solr.xml` 里配置提供者，默认就是这个
 * `org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider`: 它让你用系统属性来自定义证书。它支持最多一组证书
@@ -85,3 +85,26 @@ public interface ZkACLProvider {
 }
 ```
 
+当 Solr 要添加一个新的 zk 节点(znode)，调用给定的 acl 提供者的 `getACLsToAdd()` 方法来决定哪些 ACLs 添加到这个 znode。如果未配置提供者，使用默认的实现，`DefaultZkACLProvider`
+
+#### 开箱即用的实现
+
+你可以自己实现，但 Solr 附带了
+
+* `org.apache.solr.common.cloud.DefaultZkACLProvider`: It returns a list of length one for all zNodePath-s. The single ACL entry in the list is "open-unsafe". This is the default and is used if you do not configure a provider in solr.xml.
+* `org.apache.solr.common.cloud.VMParamsAllAndReadonlyDigestZkACLProvider`: This lets you define your ACLs using system properties. Its getACLsToAdd() implementation does not use zNodePath for anything, so all znodes will get the same set of ACLs. It supports adding one or both of these
+options:
+ * A user that is allowed to do everything. 
+   * The permission is "ALL" (corresponding to all of CREATE, READ, WRITE, DELETE, and ADMIN), and the schema is "digest". 
+   * The username and password are defined by system properties "zkDigestUsername" and "
+zkDigestPassword", respectively. 
+   * This ACL will not be added to the list of ACLs unless both username and password are provided.
+  * A user that is only allowed to perform read operations. 
+   * The permission is "READ" and the schema is "digest". 
+   * The username and password are defined by system properties "zkDigestReadonlyUsern
+ame" and "zkDigestReadonlyPassword, respectively. 
+   * This ACL will not be added to the list of ACLs unless both username and password are provided.
+      
+   If neither of the above ACLs is added to the list, the (empty) ACL list of DefaultZkACLProvider will be used by default.
+   
+   
