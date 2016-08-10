@@ -110,6 +110,8 @@ public interface ZkACLProvider {
 
 ### 变更 ACL Schemes
 
+在你的 Solr 集群的运行生命期，也许想要从一个不安全的 zk 迁移到一个安全的 zk。变更 `solr.xml` 里的 `zkACLProvider` 配置能确保最新创建的节点是安全的，但不能保护已存在的数据。要修改所有存在的 ACLs，你可以用 `ZkCLI -cmd updateacls /zk-path`
+
 
 
 
