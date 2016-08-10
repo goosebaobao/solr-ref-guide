@@ -98,10 +98,9 @@ public interface ZkACLProvider {
    * 用户名和密码分别用系统属性 "`zkDigestUsername`" 和 "`zkDigestPassword`" 定义
    * 除非用户名和密码都提供，否则该 ACL 不会被添加到 ACLs 里
   * 只读的用户
-   * The permission is "READ" and the schema is "digest". 
-   * The username and password are defined by system properties "zkDigestReadonlyUsern
-ame" and "zkDigestReadonlyPassword, respectively. 
-   * This ACL will not be added to the list of ACLs unless both username and password are provided.
-      
-   If neither of the above ACLs is added to the list, the (empty) ACL list of DefaultZkACLProvider will be used by default.
+   * 权限为 "`READ`"，且 schema 为 "digest". 
+   * 用户名和密码分别用系统属性 "`zkDigestUsername`" 和 "`zkDigestPassword`" 定义
+   * 除非用户名和密码都提供，否则该 ACL 不会被添加到 ACLs 里
+
+    如果上述的 ACLs 都没有添加到列表，那么 `DefaultZkACLProvider` 的空 ACL 列表将作为默认值
 
