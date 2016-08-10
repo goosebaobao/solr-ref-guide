@@ -97,7 +97,7 @@ public interface ZkACLProvider {
    * 权限为 "`ALL`" (相当于所有的 `CREATE`, `READ`, `WRITE`, `DELETE`, `ADMIN`)，且 schema 为 "digest"
    * 用户名和密码分别用系统属性 "`zkDigestUsername`" 和 "`zkDigestPassword`" 定义
    * 除非用户名和密码都提供，否则该 ACL 不会被添加到 ACLs 里
-  * A user that is only allowed to perform read operations. 
+  * 只读的用户
    * The permission is "READ" and the schema is "digest". 
    * The username and password are defined by system properties "zkDigestReadonlyUsern
 ame" and "zkDigestReadonlyPassword, respectively. 
