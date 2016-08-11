@@ -21,4 +21,5 @@
        * [用 ZooKeeper 管理配置文件](yong_zookeeper_guan_li_pei_zhi_wen_jian.md)
        * [ZooKeeper 访问控制](zookeeper_fang_wen_kong_zhi.md)
        * [集合(collection) API](ji_540828_collection__api.md)
+* 客户端 api
 
