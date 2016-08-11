@@ -40,6 +40,8 @@ SolrJ api 包含在 Solr 里，所以你无需再下载或安装。但是，为�
 </dependency>
 ```
 
+如果你担心 SolrJ 库会增加你的应用的大小，你可用代码混淆器(例如)移除你没有用到的 api。
+
 ## 设置 XMLResponseParser
 
 ## 执行查询
