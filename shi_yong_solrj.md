@@ -24,6 +24,22 @@ SolrClient solr = new CloudSolrClient(zkHostString);
 
 ## 创建和运行 SolrJ 应用程序
 
+SolrJ api 包含在 Solr 里，所以你无需再下载或安装。但是，为了创建和运行 SolrJ 应用程序，需要添加一些库到类路径。
+
+在创建阶段，本小节展示的例子需要 `solr-solrj-x.y.z.jar` 位于类路径。
+
+在运行阶段，本小节展示的例子需要这些库在 'dist/solrj-lib' 目录。
+
+使用 maven，将下面代码放入项目的 `pom.xml`
+
+```xml
+<dependency>
+  <groupId>org.apache.solr</groupId>
+  <artifactId>solr-solrj</artifactId>
+  <version>x.y.z</version>
+</dependency>
+```
+
 ## 设置 XMLResponseParser
 
 ## 执行查询
