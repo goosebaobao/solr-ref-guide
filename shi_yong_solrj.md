@@ -102,7 +102,7 @@ document.addField("name", "Gouda cheese wheel");
 document.addField("price", "49.99");
 UpdateResponse response = solr.add(document);
 
-// Remember to commit your changes!
+// 记得提交你的改变
 
 solr.commit();
 ```
