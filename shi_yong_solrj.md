@@ -108,7 +108,11 @@ solr.commit();
 
 ## 以 XML 或 二进制格式更新内容
 
+SolrJ 让你以二进制格式上传内容而不是默认的 XML 格式。使用下面的代码以二进制上传，和 SolrJ 获取结果的格式一样。如果你同时使用 1.x 的 Solr 和 3.x+ 的 SolrJ，那么你必须使用 XML 格式提交请求。
 
+```java
+server.setRequestWriter(new BinaryRequestWriter());
+```
 
 ## 使用 ConcurrentUpdateSolrClient
 
