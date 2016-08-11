@@ -77,7 +77,19 @@ query.setFields("category", "title", "price");
 query.set("q", "category:books");
 ```
 
+准备好你的 `SolrQuery` 后，用 `query()` 提交它
 
+```java
+QueryResponse response = solr.query(query);
+```
+
+客户端创建一个网络连接并发送该查询。Solr 处理查询，发送响应，由一个 `QueryResponse` 解析。
+
+`QueryResponse` 是满足查询的文档的集合。你可以用 `getResults()` 来获取文档，还可以用其他方法来获取高亮和 facet 信息
+
+```java
+SolrDocumentList list = response.getResults();
+```
 
 ## 索引文档
 
