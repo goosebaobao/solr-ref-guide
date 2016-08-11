@@ -93,6 +93,20 @@ SolrDocumentList list = response.getResults();
 
 ## 索引文档
 
+其他操作也是一样滴简单。要索引(添加)文档，你要做的是创建一个 `SolrInputDocument` 传递给 `SolrClient` 的 `add()` 方法。下面例子假设 SolrClient 对象 'solr' 已经创建
+
+```java
+SolrInputDocument document = new SolrInputDocument();
+document.addField("id", "552199");
+document.addField("name", "Gouda cheese wheel");
+document.addField("price", "49.99");
+UpdateResponse response = solr.add(document);
+
+// Remember to commit your changes!
+
+solr.commit();
+```
+
 ## 以 XML 或 二进制格式更新内容
 
 ## 使用 ConcurrentUpdateSolrClient
