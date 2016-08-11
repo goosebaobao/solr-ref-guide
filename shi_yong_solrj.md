@@ -4,3 +4,18 @@ SolrJ 使 Java 程序更容易的和 Solr 通信。SolrJ 隐藏了大量连接�
 
 SolrJ 的中心是 `org.apache.solr.client.solrj` 包，仅包含 5 个主要的类。创建一个 `SolrClient`，代表你想要使用的 Solr 实例，然后发送 `SolrRequests` 或 `SolrQuerys` 并获取 `SolrResponses`。
 
+`SolrClient` 是个抽象类，所以要连接到远程的 Solr 实例，你实际创建的是 `HttpSolrClient` 或  `CloudSolrClient` 之一。都是通过 HTTP 与 Solr 通信，不同的是 `HttpSolrClient` 配置为使用一个确定的 Solr URL，而 `CloudSolrClient` 配置为使用 SolrCloud 集群的 zkHost 串。
+
+```java
+// 单节点 Solr 客户端
+
+String urlString = "http://localhost:8983/solr/techproducts";
+SolrClient solr = new HttpSolrClient(urlString);
+```
+
+```java
+// SolrCloud 客户端
+
+String zkHostString = "zkServerA:2181,zkServerB:2181,zkServerC:2181/solr";
+SolrClient solr = new CloudSolrClient(zkHostString);
+```
