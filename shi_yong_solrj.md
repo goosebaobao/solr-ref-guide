@@ -23,3 +23,16 @@ SolrClient solr = new CloudSolrClient(zkHostString);
 有了 `SolrClient` 后，就可以调用 `query()`，`add()`，和 `commint()` 方法。
 
 ## 创建和运行 SolrJ 应用程序
+
+## 设置 XMLResponseParser
+
+## 执行查询
+
+## 索引文档
+
+## 以 XML 或 二进制格式更新内容
+
+## 使用 ConcurrentUpdateSolrClient
+
+## 内嵌的 SolrServer
+
