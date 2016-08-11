@@ -122,3 +122,6 @@ server.setRequestWriter(new BinaryRequestWriter());
 
 ## 内嵌的 SolrServer
 
+`EmbeddedSolrServer` 类可在你的应用内运行 Solr。这个内嵌的做法在大多场景下都不推荐，而且支持的特性有限：特别是不支持 SolrCloud 和索引复制。`EmbeddedSolrServer` 的存在主要是帮助测试。
+
+了解更多 `EmbeddedSolrServer` 信息，请参考 Solr 源码 `org.apache.solr.client.solrj.embedded` 包里的 SolrJ 单元测试
