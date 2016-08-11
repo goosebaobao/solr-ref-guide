@@ -108,6 +108,8 @@ solr.commit();
 
 ## 以 XML 或 二进制格式更新内容
 
+
+
 ## 使用 ConcurrentUpdateSolrClient
 
 ## 内嵌的 SolrServer
