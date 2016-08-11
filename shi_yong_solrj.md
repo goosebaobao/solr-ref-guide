@@ -56,6 +56,27 @@ server.setParser(new XMLResponseParser());
 
 使用 `query()` 让 Solr 搜索结果。你必须传递一个描述查询的 `SolrQuery` 对象，并获得一个 QueryResponse (来自于 `org.apache.solr.client.solrj.response` 包)。
 
+`SolrQuery` 有一些方法，可以让选择请求处理器和发送参数更简单。这里有一个很简单的例子，使用默认的请求处理器，设置查询串
+
+```java
+SolrQuery query = new SolrQuery();
+query.setQuery(mQueryString);
+```
+
+要选择一个不同的请求处理器，在 SolrJ 4.0 和以后版本有个特定的方法
+
+```java
+query.setRequestHandler("/spellCheckCompRH");
+```
+
+你也可以在查询里设置任意参数。下面代码的前 2 行是互相等价的，第 3 行演示了如果在查询串里用一个 `q` 参数
+
+```java
+query.set("fl", "category,title,price");
+query.setFields("category", "title", "price");
+query.set("q", "category:books");
+```
+
 
 
 ## 索引文档
