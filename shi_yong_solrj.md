@@ -44,9 +44,9 @@ SolrJ api 包含在 Solr 里，所以你无需再下载或安装。但是，为�
 
 ## 设置 XMLResponseParser
 
-SolrJ 使用二进制格式而不是 XML 作为默认的响应格式。如果你混合 Solr 和 SolrJ 的版本，一个是 1.x 版本而另一个是 3.x 或更高的版本，那么你**必须**使用 XML 响应。
+SolrJ 使用二进制格式而不是 XML 作为默认的响应格式。如果你使用 Solr 1.x 版本 和 SolrJ 3.x+ 版本，那么你**必须**使用 XML 响应。SolrJ 响应二进制格式在 3.x 版本变更过，导致了与 Solr 1.x 完全不兼容。
 
-二进制格式在 3.x 版本变更过，这 2 个 java 二进制版本完全不兼容，下面代码将返回格式设为 XML
+下面代码将返回格式设为 XML
 
 ```java
 server.setParser(new XMLResponseParser());
