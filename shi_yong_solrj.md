@@ -116,5 +116,9 @@ server.setRequestWriter(new BinaryRequestWriter());
 
 ## 使用 ConcurrentUpdateSolrClient
 
+当用 java 应用程序加载大量文档，`ConcurrentUpdateSolrClient` 代替 `HttpSolrClient` 是另一个选择。`ConcurrentUpdateSolrClient` 缓冲了所有新的文档并写入到一个打开的 HTTP 连接。这个类是线程安全的。
+
+对于 `/update` 请求，虽然任何 SolrClient 请求都可以实现，但仅推荐使用 `ConcurrentUpdateSolrClient`
+
 ## 内嵌的 SolrServer
 
