@@ -103,7 +103,6 @@ document.addField("price", "49.99");
 UpdateResponse response = solr.add(document);
 
 // 记得提交你的改变
-
 solr.commit();
 ```
 
