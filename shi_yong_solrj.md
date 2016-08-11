@@ -120,7 +120,7 @@ server.setRequestWriter(new BinaryRequestWriter());
 
 对于 `/update` 请求，虽然任何 SolrClient 请求都可以实现，但仅推荐使用 `ConcurrentUpdateSolrClient`
 
-## 内嵌的 SolrServer
+## 内嵌的 Solr 服务器
 
 `EmbeddedSolrServer` 类可在你的应用内运行 Solr。这个内嵌的做法在大多场景下都不推荐，而且支持的特性有限：特别是不支持 SolrCloud 和索引复制。`EmbeddedSolrServer` 的存在主要是帮助测试。
 
