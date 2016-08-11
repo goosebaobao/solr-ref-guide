@@ -54,6 +54,10 @@ server.setParser(new XMLResponseParser());
 
 ## 执行查询
 
+使用 `query()` 让 Solr 搜索结果。你必须传递一个描述查询的 `SolrQuery` 对象，并获得一个 QueryResponse (来自于 `org.apache.solr.client.solrj.response` 包)。
+
+
+
 ## 索引文档
 
 ## 以 XML 或 二进制格式更新内容
