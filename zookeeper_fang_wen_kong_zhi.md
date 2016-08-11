@@ -121,6 +121,54 @@ public interface ZkACLProvider {
 
 变更 zk ACLs后，确保 `solr.xml` 内容匹配。
 
+### 例子
 
+你想要保护 zk 里所有 Solr 相关的内容。你想要一个 'admin' 用户可以对 zk 里的内容做任何事，该用户被用于在 zk 初始化 Solr 内容，及服务端的 Solr 节点。你还想要一个 'readonly' 用户，只能读取 zk 里的内容，这个用户由客户端使用
 
+下面的例子
+
+* 'admin' 用户的用户名和密码为 admin-user/admin-password
+* 'readonly' 用户的用户名和密码为 readonly-user/readonly-password
+
+提供者的类名必须第一个在 `solr.xml` 里配置
+
+```xml
+...
+<solrcloud>
+...
+  <str name="zkCredientialsProvider">org.apache.solr.common.cloud.VMParamsSingleSetCredentialsDigestZkCredentialsProvider</str>
+  <str name="zkACLProvider">org.apache.solr.common.cloud.VMParamsAllAndReadonlyDigestZkACLProvider</str>
+```
+#### 使用 ZkCli
+
+```shell
+SOLR_ZK_CREDS_AND_ACLS="-DzkDigestUsername=admin-user
+-DzkDigestPassword=admin-password \
+-DzkDigestReadonlyUsername=readonly-user
+-DzkDigestReadonlyPassword=readonly-password"
+
+java ... $SOLR_ZK_CREDS_AND_ACLS ... org.apache.solr.cloud.ZkCLI -cmd ...
+```
+
+#### 要使用 bin/solr，添加下面内容到 bin/solr.in.sh 末尾
+
+```shell
+SOLR_ZK_CREDS_AND_ACLS="-DzkDigestUsername=admin-user
+-DzkDigestPassword=admin-password \
+-DzkDigestReadonlyUsername=readonly-user
+-DzkDigestReadonlyPassword=readonly-password"
+
+SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_CREDS_AND_ACLS"
+```
+
+#### 要使用客户端(SolrJ)
+
+```shell
+SOLR_ZK_CREDS_AND_ACLS="-DzkDigestUsername=readonly-user
+-DzkDigestPassword=readonly-password"
+
+java ... $SOLR_ZK_CREDS_AND_ACLS ...
+```
+
+或许你使用自己开发的 SolrZkClient 客户端，你可以覆盖提供者的代码
 
