@@ -19,3 +19,5 @@ SolrClient solr = new HttpSolrClient(urlString);
 String zkHostString = "zkServerA:2181,zkServerB:2181,zkServerC:2181/solr";
 SolrClient solr = new CloudSolrClient(zkHostString);
 ```
+
+有了 `SolrClient` 后，就可以调用 `query()`，`add()`，和 `commint()` 方法。
