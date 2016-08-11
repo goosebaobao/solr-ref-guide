@@ -112,6 +112,13 @@ public interface ZkACLProvider {
 
 在你的 Solr 集群的运行生命期，也许想要从一个不安全的 zk 迁移到一个安全的 zk。变更 `solr.xml` 里的 `zkACLProvider` 配置能确保最新创建的节点是安全的，但不能保护已存在的数据。要修改所有存在的 ACLs，你可以用 `ZkCLI -cmd updateacls /zk-path`
 
+只有你的 SolrCloud 集群停止时，才能变更 zk 里的 ACLs。强行在 Solr 运行时变更会导致状态不一致和一些节点不可达。要配置新的 ACLs，运行 ZkCli，附带如下 vm 属性：`-DzkACLProvider=...`， `-DzkCredentialsProvider=....`
 
+* 证书提供者必须在当前节点上有管理员权限。如果省略，该操作将不使用证书(适用于不安全的配置)
+* ACL 提供者将用来计算新的 ACLs。如果省略，该操作会将所有权限赋予任意用户，移除现有的安全控制
+
+你可以用之前介绍过的 `VMParamsSingleSetCredentialsDigestZkCredentialsProvider` 和 `VMParamsAllAndReadonlyDigestZkACLProvider` 作为上面的属性
+
+变更 zk ACLs后，确保 `solr.xml` 内容匹配。
 
 
