@@ -10,7 +10,7 @@
        * [函数查询](han_shu_cha_xun.md)
        * [查询中的局部参数](cha_xun_zhong_de_ju_bu_can_shu.md)
        * [其他解析器](qi_ta_jie_xi_qi.md)
-   * 建议
+   * [建议](jian_yi.md)
 * [SolrCloud](solrcloud.md)
    * [SolrCloud 入门](solrcloud_ru_men.md)
    * [SolrCloud 如何工作](solrcloud_ru_he_gong_zuo.md)
