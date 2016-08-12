@@ -11,3 +11,12 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 * 分布式支持
 
 在 Solr 的 `techproducts` 示例里已在 `solrconfig.xml` 里配置了新的建议实现。了解更多的搜索组件，参考 `RequestHandlers and SearchComponents in SolrConfig`
+
+覆盖了如下小节
+* 在 `solrconfig.xml` 配置建议
+ * 添加建议搜索组件
+ * 添加建议请求处理器
+* 使用例子
+ * Get Suggestions with Weights
+ * Multiple Dictionaries
+ * Context Filtering
