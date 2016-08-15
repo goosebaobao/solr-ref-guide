@@ -115,6 +115,14 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 ##### DocumentDictionaryFactory
 
+词典包含：词条，权重和可选的来自索引的负荷(payload)
+
+参数
+
+* weightField: 一个存储的字段，或DocValue 数值字段。该字段可选
+* payloadField: 一个存储的字段，可选的
+* contextField: 上下文过滤字段，注意只有某些查找实现支持过滤
+
 ##### DocumentExpressionDictionaryFactory
 
 ##### HighFrequencyDictionaryFactory
