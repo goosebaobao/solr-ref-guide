@@ -107,6 +107,8 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 ##### JaspellLookupFactory
 
+来自 JsSpell 项目，基于三叉树但更加复杂的查找。如果想要更加复杂的匹配结果使用这个实现
+
 #### 词典实现
 
 ##### DocumentDictionaryFactory
