@@ -247,7 +247,7 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=
 
 示例的内容过滤建议查询
 
-```
+```cmd
 http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true& \ 
 suggest.dictionary=mySuggester&wt=json&suggest.q=c&suggest.cfq=memory
 ```
