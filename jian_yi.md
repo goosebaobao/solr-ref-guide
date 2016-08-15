@@ -229,6 +229,8 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=
 在你的建议配置里添加 `contextField`。这个示例将建议名称且按分类过滤
 
 ```xml
+<!--solrconfig.xml-->
+
 <searchComponent name="suggest" class="solr.SuggestComponent">
   <lst name="suggester">
     <str name="name">mySuggester</str>
@@ -242,6 +244,15 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=
   </lst>
 </searchComponent>
 ```
+
+示例的内容过滤建议查询
+
+```
+http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true& \ 
+suggest.dictionary=mySuggester&wt=json&suggest.q=c&suggest.cfq=memory
+```
+
+该建议将只返回产品标签为 cat=memory 的建议
 
 
 
