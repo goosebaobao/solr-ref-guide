@@ -125,7 +125,7 @@ A simple compact ternary trie based lookup.
 
 > **上下文过滤**
 >
-> 上下文过滤(suggest.cfg)当前仅 AnalyzingInfixLookupFactory 和 BlendedInfixLookupFactory 支持，且仅当 Document*Dictionary。其他实现将忽视过滤请求，返回未过滤的匹配。
+> 上下文过滤(suggest.cfg)当前仅 AnalyzingInfixLookupFactory 和 BlendedInfixLookupFactory 支持，且仅当词典实现为 Document*Dictionary。其他实现将忽视过滤请求，返回未过滤的匹配。
 
 
 
