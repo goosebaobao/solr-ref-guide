@@ -125,6 +125,14 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 ##### DocumentExpressionDictionaryFactory
 
+与 DocumentDictionaryFactory 一样，但是允许指定一个任意的表达式。
+
+参数
+
+* weightExpression: 用于对建议评分的任意表达式，必须使用数值字段。该字段是必须滴
+* payloadField: 一个存储的字段，可选的
+* contextField: 上下文过滤字段，注意只有某些查找实现支持过滤
+
 ##### HighFrequencyDictionaryFactory
 
 ##### FileDictionaryFactory
