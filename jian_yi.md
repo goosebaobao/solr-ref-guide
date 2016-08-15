@@ -131,6 +131,12 @@ A simple compact ternary trie based lookup.
 
 ### 根据权重获取建议
 
+最基本的建议，使用单个词典和单个 Slor core，示例
+
+```
+http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=elec
+```
+
 ### 多重词典
 
 ### 内容过滤
