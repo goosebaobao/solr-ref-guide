@@ -80,11 +80,11 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 该实现使用下面的额外属性
 
-* exactMatchFirst: If true, the default, exact suggestions are returned first, even if they are prefixes or other strings in the FST have larger weights.
-* preserveSep: If true, the default, then a separator between tokens is preserved. This means that suggestions are sensitive to tokenization (e.g., baseball is different from base ball).
+* exactMatchFirst: 默认=true，首先返回准确的建议，即便其前缀或其他字符串在 FST 里有更高的权重。(这个应该是表示优先返回完全匹配的建议)
+* preserveSep: 默认=true，保留词元之间的分隔符。这表示对分词敏感(例如，baseball 和 base ball 是不同的)
 * maxSurfaceFormsPerAnalyzedForm: Maximum number of surface forms to keep for a single analyzed form. When there are too many surface forms we discard the lowest weighted ones.
 * maxGraphExpansions: When building the FST ("index-time"), we add each path through the tokenstream graph as an individual entry. This places an upper-bound on how many expansions will be added for a single suggestion. The default is -1 which means there is no limit.
-* preservePositionIncrements: If true, the suggester will preserve position increments. This means that token filters which leave gaps (for example, when StopFilter matches a stopword) the position would be respected when building the suggester. The default is false.
+* preservePositionIncrements: 如果为 true，建议会保留位置增量。这表示构建建议时保留位置间隔的分词过滤器更受尊重(?)。默认=false
 * maxEdits: The maximum number of string edits allowed. The systems hard limit is 2. The default is 1.
 * transpositions: If true, the default, transpositions should be treated as a primitive edit operation.
 * nonFuzzyPrefix: The length of the common non fuzzy prefix match which must match a suggestion. The default is 1.
