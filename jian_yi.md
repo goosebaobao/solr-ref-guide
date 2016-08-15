@@ -59,3 +59,39 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 | buildOnCommit 或 buildOnOptimize | 如果为 true，查找数据结构在软提交后会被重建。默认为 false，查找数据仅在 URL 参数 `suggest.build=true` 时重建。`buildOnCommit` 会在每次软提交时重建词典，`buildOnOptimize` 仅在索引优化时重建词典。某些查找实现创建(建议)非常耗时，尤其是对大索引，这种场景下，不推荐在有高频的软提交时使用 `buildOnCommit` 或 `buildOnOptimize`，替代的是，推荐低频的手工创建建议，使用 `suggest.build=true` 发送请求 |
 | buildOnStartup | true 表示在 Solr 启动时或 core 重载时创建查找数据结构。如果该参数未指定，会检查查找数据结构是否存在于磁盘，如果不存在则创建。设为 true 会导致 core 在加载(或重载)时更耗时，因为需要创建建议数据结构，而这是个耗时的操作。通常把这个设置设为 false，并手工创建建议，使用 `suggest.build=true` 发送请求|
 
+#### 查找实现
+
+##### AnalyzingLookupFactory
+
+##### FuzzyLookupFactory
+
+##### AnalyzingInfixLookupFactory
+
+##### BlendedInfixLookupFactory
+
+##### FreeTextLookupFactory
+
+##### FSTLookupFactory
+
+##### TSTLookupFactory
+
+A simple compact ternary trie based lookup.
+
+##### WFSTLookupFactory
+
+##### JaspellLookupFactory
+
+#### 词典实现
+
+##### DocumentDictionaryFactory
+
+##### DocumentExpressionDictionaryFactory
+
+##### HighFrequencyDictionaryFactory
+
+##### FileDictionaryFactory
+
+#### 多重词典
+
+### 添加建议请求处理器(Suggest Request Handler)
+
