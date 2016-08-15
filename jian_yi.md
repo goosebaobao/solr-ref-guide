@@ -73,9 +73,10 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 * exactMatchFirst: 默认=true，首先返回准确的建议，即便其前缀或其他字符串在 FST 里有更高的权重。(这个应该是表示优先返回完全匹配的建议)
 * preserveSep: 默认=true，保留词元之间的分隔符。这表示对分词敏感(例如，baseball 和 base ball 是不同的)
 * preservePositionIncrements: 如果为 true，建议会保留位置增量。这表示构建建议时保留位置间隔的分词过滤器更受尊重(?)。默认=false
-* If true, the suggester will preserve position increments. This means that token filters which leave gaps (for example, when StopFilter matches a stopword) the position would be respected when building the suggester. The default is false
 
 ##### FuzzyLookupFactory
+
+
 
 ##### AnalyzingInfixLookupFactory
 
