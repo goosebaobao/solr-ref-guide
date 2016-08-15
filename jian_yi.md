@@ -95,6 +95,10 @@ A simple compact ternary trie based lookup.
 
 ### 添加建议请求处理器(Suggest Request Handler)
 
+添加搜索组件以后，必须在 `solrconfig.xml` 里添加请求处理器(request handler)。这个请求处理器和其他的请求处理器一样，允许你配置默认参数来为建议请求服务。这个请求处理器的定义里必须包含之前定义的建议搜索组件。
+
+
+
 #### 建议请求处理器参数
 
 ## 用法示例
