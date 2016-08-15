@@ -95,3 +95,15 @@ A simple compact ternary trie based lookup.
 
 ### 添加建议请求处理器(Suggest Request Handler)
 
+#### 建议请求处理器参数
+
+## 用法示例
+
+### 根据权重获取建议
+
+### 多重词典
+
+### 内容过滤
+
+
+
