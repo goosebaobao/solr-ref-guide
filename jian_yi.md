@@ -111,6 +111,20 @@ A simple compact ternary trie based lookup.
 
 #### 建议请求处理器参数
 
+| 参数 | 说明 |
+| -- | -- |
+| suggest=true | 该参数必须为 true |
+| suggest.dictionary | 在搜索组件里配置的词典组件的名称。该参数是必须滴，可以在请求处理器里设置，也可以在查询时通过参数传递 |
+| suggest.q | 查找建议时用的查询 |
+| suggest.count | 指定 Solr 返回的建议数量 |
+| suggest.cfq | cfq = Context Filter Query，如果支持的话，用于过滤建议的上下文字段 |
+| suggest.build | true 表示构建建议索引。仅在初次请求时有用；你应该不会想在每次请求时构建词典，尤其是在生产环境。如果想要保持词典最新，应该在搜索组件上使用 `buildOnCommit` 或 `buildOnOptimize` 参数 |
+| suggest.reload | true 表示重载建议索引 |
+| suggest.buildAll | true 表示构建所有的建议索引|
+| suggest.reloadAll | true 表示重载所有的建议索引 |
+
+
+
 ## 用法示例
 
 ### 根据权重获取建议
