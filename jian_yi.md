@@ -177,6 +177,12 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&
 
 ### 多重词典
 
+如果定义了多个词典，可以在查询里使用它们。示例查询
+
+```
+http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=mySuggester&suggest.dictionary=altSuggester&wt=json&suggest.q=elec
+```
+
 ### 内容过滤
 
 
