@@ -61,7 +61,11 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 
 #### 查找实现
 
+`lookupImpl` 参数定义了在建议索引里查找词条的算法。有几种实现可供选择，有些还需要额外的配置参数
+
 ##### AnalyzingLookupFactory
+
+
 
 ##### FuzzyLookupFactory
 
