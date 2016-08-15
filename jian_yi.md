@@ -139,6 +139,34 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 #### 多重词典
 
+单个建议组件里可以包含多个词典实现。只需简单的分别定义建议，示例如下
+
+```xml
+<searchComponent name="suggest" class="solr.SuggestComponent">
+  <lst name="suggester">
+    <str name="name">mySuggester</str>
+    <str name="lookupImpl">FuzzyLookupFactory</str>
+    <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+    <str name="field">cat</str>
+    <str name="weightField">price</str>
+    <str name="suggestAnalyzerFieldType">string</str>
+  </lst>
+  <lst name="suggester">
+    <str name="name">altSuggester</str>
+    <str name="dictionaryImpl">DocumentExpressionDictionaryFactory</str>
+    <str name="lookupImpl">FuzzyLookupFactory</str>
+    <str name="field">product_name</str>
+    <str name="weightExpression">((price * 2) + ln(popularity))</str>
+    <str name="sortField">weight</str>
+    <str name="sortField">price</str>
+    <str name="storeDir">suggest_fuzzy_doc_expr_dict</str>
+    <str name="suggestAnalyzerFieldType">text_en</str>
+  </lst>
+</searchComponent>
+```
+
+在查询里使用建议时，可以在请求里定义多个 'suggest.dictionary' 参数，引用搜索组件里定义的每个建议的名称即可。响应里会包含每个建议的小节。
+
 ### 添加建议请求处理器(Suggest Request Handler)
 
 添加搜索组件以后，必须在 `solrconfig.xml` 里添加请求处理器(request handler)。这个请求处理器和其他的请求处理器一样，允许你配置默认参数来为建议请求服务。这个请求处理器的定义里必须包含之前定义的建议搜索组件。
