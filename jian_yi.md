@@ -65,7 +65,14 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 
 ##### AnalyzingLookupFactory
 
+该实现首先分析输入文本，然后将分析过的结果添加到一个加权的 FST(?)，在查找时同样这么做。
 
+这个实现使用下面列出的额外的属性
+
+* suggestAnalyzerFieldType: 在构建和查询时分析建议所用的字段类型
+* exactMatchFirst: 默认=true，首先返回准确的建议，即便其前缀或其他字符串在 FST 里有更高的权重
+* preserveSep: If true, the default, then a separator between tokens is preserved. This means that suggestions are sensitive to tokenization (e.g., baseball is different from base ball).
+* preservePositionIncrements: If true, the suggester will preserve position increments. This means that token filters which leave gaps (for example, when StopFilter matches a stopword) the position would be respected when building the suggester. The default is false
 
 ##### FuzzyLookupFactory
 
