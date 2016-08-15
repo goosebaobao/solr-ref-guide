@@ -80,8 +80,7 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 该实现使用下面的额外属性
 
-* exactMatchFirst: If true, the default, exact suggestions are returned first, even if they are prefixes or other
-strings in the FST have larger weights.
+* exactMatchFirst: If true, the default, exact suggestions are returned first, even if they are prefixes or other strings in the FST have larger weights.
 * preserveSep: If true, the default, then a separator between tokens is preserved. This means that suggestions are sensitive to tokenization (e.g., baseball is different from base ball).
 * maxSurfaceFormsPerAnalyzedForm: Maximum number of surface forms to keep for a single analyzed form. When there are too many surface forms we discard the lowest weighted ones.
 * maxGraphExpansions: When building the FST ("index-time"), we add each path through the tokenstream graph as an individual entry. This places an upper-bound on how many expansions will be added for a single suggestion. The default is -1 which means there is no limit.
