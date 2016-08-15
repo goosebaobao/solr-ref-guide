@@ -56,6 +56,6 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 | field | 索引里的一个字段，用来作为建议词条的基础，如果 `sourceLocation` 为空(意味着 FileDictionaryFactory 之外的词典实现)那么这个字段里索引的词条被使用。<br>要作为建议的基础，这个字段必须是存储的。你也许想要用 copyField 来创建一个包含文档里其他字段的建议字段。无论如何，你希望该字段的分析最小化，所以，一个额外的选项是在你的 schema 创建一个只使用基本的分词器或过滤器的字段，如下面的一个字段<br><br>`<fieldType class="solr.TextField" name="textSuggest" positionIncrementGap="100">`<br>`<analyzer>`<br>`<tokenizer class="solr.StandardTokenizerFactory"/>`<br>`<filter class="solr.StandardFilterFactory"/>`<br>`<filter class="solr.LowerCaseFilterFactory"/>`<br>`</analyzer>`<br>`</fieldType>`<br><br>但是，如果你想要在词条上作更多的分析，如果使用 AnalyzingLookupFactory 作为查找实现，你就有了在索引和查询时分析的字段选项 |
 | sourceLocation | 词典文件路径，用于 FileDictionaryFactory。如果该值为空，那么主索引将被用于词条和权重的来源 |
 | storeDir | 保存词典文件的路径 |
-| buildOnCommit 或 buildOnOptimize | 如果为 true，查找数据结构在软提交后会被重建。默认为 false，查找数据仅在 URL 参数 `suggest.build=true` 时重建。`buildOnCommit` 会在每次软提交时重建词典，`buildOnOptimize` 仅在索引优化时重建词典。某些查找实现重建非常耗时，尤其是对大索引，这种场景下，不推荐在有高频的软提交时使用 `buildOnCommit` 或 `buildOnOptimize`，替代的是，推荐低频的手工创建建议，使用 `suggest.build=true` 发送请求|
+| buildOnCommit 或 buildOnOptimize | 如果为 true，查找数据结构在软提交后会被重建。默认为 false，查找数据仅在 URL 参数 `suggest.build=true` 时重建。`buildOnCommit` 会在每次软提交时重建词典，`buildOnOptimize` 仅在索引优化时重建词典。某些查找实现创建(建议)非常耗时，尤其是对大索引，这种场景下，不推荐在有高频的软提交时使用 `buildOnCommit` 或 `buildOnOptimize`，替代的是，推荐低频的手工创建建议，使用 `suggest.build=true` 发送请求|
 | buildOnStartup | |
 
