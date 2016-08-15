@@ -89,7 +89,7 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 * transpositions: If true, the default, transpositions should be treated as a primitive edit operation.
 * nonFuzzyPrefix: The length of the common non fuzzy prefix match which must match a suggestion. The default is 1.
 * minFuzzyLength: The minimum length of query before which any string edits will be allowed. The default is 3.
-* unicodeAware: If true, maxEdits, minFuzzyLength, transpositions and nonFuzzyPrefix parameters will be measured in unicode code points (actual letters) instead of bytes. The default is false.
+* unicodeAware: 默认=false，如果为 true，则 maxEdits, minFuzzyLength, transpositions 和 nonFuzzyPrefix 参数以 unicode code 字符来计算而不是字节
 
 ##### AnalyzingInfixLookupFactory
 
