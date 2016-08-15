@@ -131,11 +131,15 @@ A simple compact ternary trie based lookup.
 
 ### 根据权重获取建议
 
-最基本的建议，使用单个词典和单个 Slor core，示例
+这是最基本的建议，使用单个词典和单个 Slor core，示例
 
 ```
 http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=elec
 ```
+
+在这个例子里，有一个简单的请求：,suggest.q 参数指定字符串 'elec'，suggest.build 参数指定构建建议词典(注意，你不会想要每次请求都构建建议词典，取而代之的是使用 buildOnCommit 或 buildOnOptimize，如果你定期改变文档)
+
+
 
 ### 多重词典
 
