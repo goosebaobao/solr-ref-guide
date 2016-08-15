@@ -111,6 +111,8 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 #### 词典实现
 
+词典实现定义了词条如何存储。有多个选项，如果有必要的话，单个请求可以使用多个词典。
+
 ##### DocumentDictionaryFactory
 
 ##### DocumentExpressionDictionaryFactory
