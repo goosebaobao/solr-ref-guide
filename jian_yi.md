@@ -76,7 +76,21 @@ Solr 建议组件(SuggestComponet)为用户在查询词条时提供自动的建�
 
 ##### FuzzyLookupFactory
 
+AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量相似性。
 
+该实现使用下面的额外属性
+
+* exactMatchFirst: If true, the default, exact suggestions are returned first, even if they are prefixes or other
+strings in the FST have larger weights.
+* preserveSep: If true, the default, then a separator between tokens is preserved. This means that suggestions are sensitive to tokenization (e.g., baseball is different from base ball).
+* maxSurfaceFormsPerAnalyzedForm: Maximum number of surface forms to keep for a single analyzed form. When there are too many surface forms we discard the lowest weighted ones.
+* maxGraphExpansions: When building the FST ("index-time"), we add each path through the tokenstream graph as an individual entry. This places an upper-bound on how many expansions will be added for a single suggestion. The default is -1 which means there is no limit.
+* preservePositionIncrements: If true, the suggester will preserve position increments. This means that token filters which leave gaps (for example, when StopFilter matches a stopword) the position would be respected when building the suggester. The default is false.
+* maxEdits: The maximum number of string edits allowed. The systems hard limit is 2. The default is 1.
+* transpositions: If true, the default, transpositions should be treated as a primitive edit operation.
+* nonFuzzyPrefix: The length of the common non fuzzy prefix match which must match a suggestion. The default is 1.
+* minFuzzyLength: The minimum length of query before which any string edits will be allowed. The default is 3.
+* unicodeAware: If true, maxEdits, minFuzzyLength, transpositions and nonFuzzyPrefix parameters will be measured in unicode code points (actual letters) instead of bytes. The default is false.
 
 ##### AnalyzingInfixLookupFactory
 
