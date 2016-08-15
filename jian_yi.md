@@ -101,7 +101,7 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 
 ##### TSTLookupFactory
 
-简单紧凑的三叉树的查找
+简单紧凑的三叉树(Ternary Trie)的查找
 
 ##### WFSTLookupFactory
 
