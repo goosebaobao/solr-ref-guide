@@ -252,7 +252,7 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&
 suggest.dictionary=mySuggester&wt=json&suggest.q=c&suggest.cfq=memory
 ```
 
-该建议将只返回产品标签为 cat=memory 的建议
+该建议将只返回产品标记为 cat=memory 的建议
 
 
 
