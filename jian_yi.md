@@ -183,7 +183,48 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&
 http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=mySuggester&suggest.dictionary=altSuggester&wt=json&suggest.q=elec
 ```
 
+在这个例子里，发送了 suggest.q 参数为字符串 'elec' 和 2 个 suggest.dictionary 
+
+示例的响应
+
+```json
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 3
+  },
+  "suggest": {
+    "mySuggester": {
+      "elec": {
+        "numFound": 1,
+        "suggestions": [
+          {
+            "term": "electronics and computer1",
+            "weight": 100,
+            "payload": ""
+          }
+        ]
+      }
+    },
+    "altSuggester": {
+      "elec": {
+        "numFound": 1,
+        "suggestions": [
+          {
+            "term": "electronics and computer1",
+            "weight": 10,
+            "payload": ""
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
 ### 内容过滤
+
+
 
 
 
