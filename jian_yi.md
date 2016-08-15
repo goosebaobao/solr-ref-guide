@@ -139,7 +139,41 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&
 
 在这个例子里，有一个简单的请求：,suggest.q 参数指定字符串 'elec'，suggest.build 参数指定构建建议词典(注意，你不会想要每次请求都构建建议词典，取而代之的是使用 buildOnCommit 或 buildOnOptimize，如果你定期改变文档)
 
+示例的响应
 
+```json
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 35
+  },
+  "command": "build",
+  "suggest": {
+    "mySuggester": {
+      "elec": {
+        "numFound": 3,
+        "suggestions": [
+          {
+            "term": "electronics and computer1",
+            "weight": 2199,
+            "payload": ""
+          },
+          {
+            "term": "electronics",
+            "weight": 649,
+            "payload": ""
+          },
+          {
+            "term": "electronics and stuff2",
+            "weight": 279,
+            "payload": ""
+          }
+        ]
+      }
+    }
+  }
+}
+```
 
 ### 多重词典
 
