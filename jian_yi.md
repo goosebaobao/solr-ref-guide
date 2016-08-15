@@ -224,7 +224,24 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.dictionary=
 
 ### 内容过滤
 
+上下文过滤让你使用分离的上下文字段来过滤建议，例如分类，部门或其他。AnalyzingInfixLookupFactory 和 BlendedInfixLookupFactory 当前支持这个特性，当后台是用的 DocumentDictionaryFactory。
 
+在你的建议配置里添加 `contextField`。这个示例将建议名称且按分类过滤
+
+```xml
+<searchComponent name="suggest" class="solr.SuggestComponent">
+  <lst name="suggester">
+    <str name="name">mySuggester</str>
+    <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
+    <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+    <str name="field">name</str>
+    <str name="weightField">price</str>
+    <str name="contextField">cat</str>
+    <str name="suggestAnalyzerFieldType">string</str>
+    <str name="buildOnStartup">false</str>
+  </lst>
+</searchComponent>
+```
 
 
 
