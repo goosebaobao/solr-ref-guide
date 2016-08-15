@@ -123,6 +123,11 @@ A simple compact ternary trie based lookup.
 | suggest.buildAll | true 表示构建所有的建议索引|
 | suggest.reloadAll | true 表示重载所有的建议索引 |
 
+> **上下文过滤**
+>
+> 上下文过滤(suggest.cfg)当前仅 AnalyzingInfixLookupFactory 和 BlendedInfixLookupFactory 支持，且仅当 Document*Dictionary。其他实现将忽视过滤请求，返回未过滤的匹配。
+
+
 
 
 ## 用法示例
