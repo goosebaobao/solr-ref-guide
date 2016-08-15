@@ -85,7 +85,7 @@ AnalyzingSuggester 的扩展，但是模糊性。Levenshtein 算法用于衡量�
 * maxSurfaceFormsPerAnalyzedForm: Maximum number of surface forms to keep for a single analyzed form. When there are too many surface forms we discard the lowest weighted ones.
 * maxGraphExpansions: When building the FST ("index-time"), we add each path through the tokenstream graph as an individual entry. This places an upper-bound on how many expansions will be added for a single suggestion. The default is -1 which means there is no limit.
 * preservePositionIncrements: 如果为 true，建议会保留位置增量。这表示构建建议时保留位置间隔的分词过滤器更受尊重(?)。默认=false
-* maxEdits: The maximum number of string edits allowed. The systems hard limit is 2. The default is 1.
+* maxEdits: 可编辑的字符串最大数值。系统最大限制为 2，默认为 1
 * transpositions: If true, the default, transpositions should be treated as a primitive edit operation.
 * nonFuzzyPrefix: The length of the common non fuzzy prefix match which must match a suggestion. The default is 1.
 * minFuzzyLength: The minimum length of query before which any string edits will be allowed. The default is 3.
