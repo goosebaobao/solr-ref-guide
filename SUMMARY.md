@@ -24,7 +24,7 @@
        * [集合(collection) API](ji_540828_collection__api.md)
        * [参数指南](can_shu_zhi_nan.md)
        * [命令行工具](ming_ling_xing_gong_ju.md)
-       * 遗留的配置文件
+       * [遗留的配置文件](yi_liu_de_pei_zhi_wen_jian.md)
 * [客户端 api](ke_hu_duan_api.md)
    * [使用 SolrJ](shi_yong_solrj.md)
 
