@@ -23,7 +23,7 @@
        * [ZooKeeper 访问控制](zookeeper_fang_wen_kong_zhi.md)
        * [集合(collection) API](ji_540828_collection__api.md)
        * [参数指南](can_shu_zhi_nan.md)
-       * 命令行工具
+       * [命令行工具](ming_ling_xing_gong_ju.md)
        * 遗留的配置文件
 * [客户端 api](ke_hu_duan_api.md)
    * [使用 SolrJ](shi_yong_solrj.md)
