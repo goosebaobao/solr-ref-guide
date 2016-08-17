@@ -31,4 +31,77 @@ Solr 管理页面(默认在 ` http://hostname:8983/solr/`)，提供了索引监�
 
 ## zk CLI 示例
 
+下面的例子，均假设你已启动了 SolrCloud(`bin/solr -e cloud -noprompt`)
+
+### 上传一个配置目录
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd upconfig -confname my_new_config -confdir
+server/solr/configsets/basic_configs/conf
+```
+
+### 引导 zk 从已存在的 SOLR_HOME
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:2181 \
+-cmd bootstrap -solrhome /var/solr/data
+```
+
+> **Bootstrap with chroot**
+> 
+> 使用 `bootstrap` 指令，及一个zk 的 chroot，例如 `-zkhost 127.0.0.1:2181/solr`，将在上传配置前自动的创建 chroot 路径
+
+### 将任意数据写入新的 zk 文件
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd put /my_zk_file.txt 'some data'
+```
+
+### 将本地文件写入 zk 文件
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd putfile /my_zk_file.txt /tmp/my_local_file.txt
+```
+
+### 将一个集合连接到一个配置集
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd linkconfig -collection gettingstarted -confname my_new_config
+```
+
+### 创建一个新的 zk 路径
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:2181 \
+-cmd makepath /solr
+```
+
+### 设置一个集群属性
+
+```bash
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:2181 \
+-cmd clusterprop -name urlScheme -val https
+```
+
+### 示例
+
+```bash
+zkcli.sh -zkhost localhost:9983 -cmd bootstrap -solrhome /opt/solr
+zkcli.sh -zkhost localhost:9983 -cmd upconfig -confdir /opt/solr/collection1/conf -confname myconf
+zkcli.sh -zkhost localhost:9983 -cmd downconfig -confdir /opt/solr/collection1/conf -confname myconf
+zkcli.sh -zkhost localhost:9983 -cmd linkconfig -collection collection1 -confname myconf
+zkcli.sh -zkhost localhost:9983 -cmd makepath /apache/solr
+zkcli.sh -zkhost localhost:9983 -cmd put /solr.conf 'conf data'
+zkcli.sh -zkhost localhost:9983 -cmd putfile /solr.xml /User/myuser/solr/solr.xml
+zkcli.sh -zkhost localhost:9983 -cmd get /solr.xml
+zkcli.sh -zkhost localhost:9983 -cmd getfile /solr.xml solr.xml.file
+zkcli.sh -zkhost localhost:9983 -cmd clear /solr
+zkcli.sh -zkhost localhost:9983 -cmd list
+zkcli.sh -zkhost localhost:9983 -cmd clusterprop -name urlScheme -val https
+zkcli.sh -zkhost localhost:9983 -cmd updateacls /solr
+```
 
