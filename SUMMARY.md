@@ -24,6 +24,7 @@
        * [集合(collection) API](ji_540828_collection__api.md)
        * 参数指南
        * 命令行工具
+       * 在 SolrCloud 使用遗留的配置文件
 * [客户端 api](ke_hu_duan_api.md)
    * [使用 SolrJ](shi_yong_solrj.md)
 
