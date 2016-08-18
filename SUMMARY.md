@@ -20,6 +20,7 @@
        * RequestHandlers 和 SearchComponents
        * InitParams
        * UpdateHandlers
+       * Query Settings
    * solr cores 及 solr.xml
    * 配置 API
    * solr 插件
