@@ -27,4 +27,5 @@
        * [遗留的配置文件](yi_liu_de_pei_zhi_wen_jian.md)
 * [客户端 api](ke_hu_duan_api.md)
    * [使用 SolrJ](shi_yong_solrj.md)
+* 配置良好的 Solr 实例
 
