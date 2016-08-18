@@ -12,6 +12,7 @@
        * [其他解析器](qi_ta_jie_xi_qi.md)
    * [建议](jian_yi.md)
 * [配置良好的 Solr 实例](pei_zhi_liang_hao_de_solr_shi_li.md)
+   * 配置 solrconfig.xml
 * [SolrCloud](solrcloud.md)
    * [SolrCloud 入门](solrcloud_ru_men.md)
    * [SolrCloud 如何工作](solrcloud_ru_he_gong_zuo.md)
