@@ -21,6 +21,7 @@
        * InitParams
        * UpdateHandlers
        * Query Settings
+       * RequestDispatcher
    * solr cores 及 solr.xml
    * 配置 API
    * solr 插件
