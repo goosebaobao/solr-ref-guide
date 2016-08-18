@@ -13,6 +13,7 @@
    * [建议](jian_yi.md)
 * [配置良好的 Solr 实例](pei_zhi_liang_hao_de_solr_shi_li.md)
    * [配置 solrconfig.xml](pei_zhi_solrconfig__xml.md)
+       * DataDir 和 DirectoryFactory
    * solr cores 及 solr.xml
    * 配置 API
    * solr 插件
