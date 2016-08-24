@@ -12,3 +12,25 @@
 
 `solrconfig.xml` 文件在每个集合的 `conf/` 目录。在 `server/solr/configsets` 目录下可以发现几个注释完善的示例文件，示范了几种不同安装的最佳实践
 
+## 在 solr 配置文件里使用占位符
+
+在配置文件 `solrconfig.xml` 可以使用占位符，语法是 `${属性名:可选的默认值}`。
+
+### JVM 系统属性
+
+启动 JVM 时，通过 `-D` 标识设定 JVM 系统属性，可以用在配置文件里。
+
+例如，在 `solrconfig.xml` 文件里，可以这样定义锁定类型
+
+```xml
+<lockType>${solr.lock.type:native}</lockType>
+```
+
+这表示锁定类型(lockType)默认为"native"，但是在启动 JVM 时，可以用 JVM 系统属性来覆盖该默认值
+
+```bash
+bin/solr start -Dsolr.lock.type=none
+```
+
+
+
