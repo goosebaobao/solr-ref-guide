@@ -32,7 +32,7 @@
 bin/solr start -Dsolr.lock.type=none
 ```
 
-通常，你可以传递任意属性给 `bin/solr` 脚本，使用标准的 `-Dproperty=value` 语法，或者，添加公共的系统属性到 `SOLR_OPTS` 环境变量，该环境变量在 `bin/solr.in.sh` 里定义。
+通常，你可以传递任意属性给 `bin/solr` 脚本，使用标准的 `-Dproperty=value` 语法，或者，添加公共的系统属性到 solr 包含文件(`bin/solr.in.sh`)里的 `SOLR_OPTS` 环境变量。
 
 
 
