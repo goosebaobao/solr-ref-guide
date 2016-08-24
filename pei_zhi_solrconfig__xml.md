@@ -47,4 +47,45 @@ solr.lock.type=none
 
 > `solrcore.properties` 文件的路径和文件名，可以在 `core.properties` 里使用 `properties` 属性重新设定
 
+## core.properties 里的用户定义属性
 
+如果你在随 `solr.xml` 一起使用 `solr.properties` 文件，该文件里用户定义的属性也可以在 xml 格式的配置文件里作为占位符使用
+ 
+例如，如下的 `solr.properties` 文件
+
+```ini
+# core.properties
+name=collection2
+my.custom.prop=edismax
+```
+
+`my.custom.prop` 属性可以作为一个变量在 `solrconfig.xml` 使用
+
+```xml
+<requestHandler name="/select">
+  <lst name="defaults">
+    <str name="defType">${my.custom.prop}</str>
+  </lst>
+</requestHandler>
+```
+
+## 隐含的 core 属性
+
+solr core 有一些隐含属性可以作为占位符使用，不论其潜在的值是在哪里或怎样初始化的。举个例子，无论 core 的名字是在 `sore.properties` 里明确设定，或是根据目录名来推断，隐含的属性 `solr.core.name` 都可以在配置文件里使用
+
+```xml
+<requestHandler name="/select">
+  <lst name="defaults">
+    <str name="collection_name">${solr.core.name}</str>
+  </lst>
+</requestHandler>
+```
+
+所有这些隐含属性都以 `solr.core` 作为前缀，如下
+
+* `solr.core.name`
+* `solr.core.config`
+* `solr.core.schema`
+* `solr.core.dataDir`
+* `solr.core.transient`
+* `solr.core.loadOnStartup`
