@@ -38,4 +38,11 @@ bin/solr start -Dsolr.lock.type=none
 
 如果在 solr core 的配置目录包含 `solrcore.properties` 文件，该文件可以定义任意的属性名及其值，这些属性都可以在配置文件里作为变量使用
 
+例如，在 conf/ 目录创建如下的 solrcore.properties 文件，来覆盖 lockType 
+
+```properties
+#conf/solrcore.properties
+solr.lock.type=none
+```
+
 
