@@ -26,7 +26,7 @@
 <lockType>${solr.lock.type:native}</lockType>
 ```
 
-这表示锁定类型(lockType)默认为"native"，但是在启动 JVM 时，可以用 JVM 系统属性来覆盖该默认值
+这表示锁定类型(`lockType`)默认为`native`，但是在启动 JVM 时，可以用 JVM 系统属性来覆盖该默认值
 
 ```bash
 bin/solr start -Dsolr.lock.type=none
