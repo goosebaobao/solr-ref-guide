@@ -41,7 +41,7 @@ bin/solr start -Dsolr.lock.type=none
 例如，在 `conf/` 目录创建如下的 `solrcore.properties` 文件，来覆盖 `lockType`
 
 ```ini
-#conf/solrcore.properties
+# conf/solrcore.properties
 solr.lock.type=none
 ```
 
