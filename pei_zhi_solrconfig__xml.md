@@ -14,7 +14,7 @@
 
 ## 在 solr 配置文件里使用占位符
 
-在配置文件 `solrconfig.xml` 可以使用占位符，语法是 `${属性名:可选的默认值}`。
+在配置文件 `solrconfig.xml` 可以使用占位符，语法是 `${属性名:可选的默认值}`。以下是设定属性值的方法
 
 ### JVM 系统属性
 
@@ -33,6 +33,8 @@ bin/solr start -Dsolr.lock.type=none
 ```
 
 通常，你可以传递任意 java 系统属性给 `bin/solr` 脚本，使用标准的 `-Dproperty=value` 语法，或者，添加公共的系统属性到 solr 包含文件(`bin/solr.in.sh`)里定义的 `SOLR_OPTS` 环境变量。
+
+### solrcore.properties
 
 
 
