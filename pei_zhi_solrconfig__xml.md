@@ -45,6 +45,6 @@ bin/solr start -Dsolr.lock.type=none
 solr.lock.type=none
 ```
 
-> `solrcore.properties` 文件的路径和名字，可以在 `core.properties` 里使用 `properties` 属性重新设定
+> `solrcore.properties` 文件的路径和文件名，可以在 `core.properties` 里使用 `properties` 属性重新设定
 
 
