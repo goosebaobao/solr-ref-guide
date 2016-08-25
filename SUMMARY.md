@@ -16,7 +16,7 @@
        * [DataDir 和 DirectoryFactory](datadir_he_directoryfactory.md)
        * [Lib Directives](lib_directives.md)
        * [Schema Factory](schema_factory.md)
-       * IndexConfig
+       * [IndexConfig](indexconfig.md)
        * RequestHandlers 和 SearchComponents
        * InitParams
        * UpdateHandlers
