@@ -17,7 +17,7 @@
        * [Lib Directives](lib_directives.md)
        * [Schema Factory](schema_factory.md)
        * [IndexConfig](indexconfig.md)
-       * RequestHandlers 和 SearchComponents
+       * [RequestHandlers 和 SearchComponents](requesthandlers_he_searchcomponents.md)
        * InitParams
        * UpdateHandlers
        * Query Settings
