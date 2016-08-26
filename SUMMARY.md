@@ -18,7 +18,7 @@
        * [Schema Factory](schema_factory.md)
        * [IndexConfig](indexconfig.md)
        * [RequestHandlers 和 SearchComponents](requesthandlers_he_searchcomponents.md)
-       * InitParams
+       * [InitParams](initparams.md)
        * UpdateHandlers
        * Query Settings
        * RequestDispatcher
