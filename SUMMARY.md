@@ -20,7 +20,7 @@
        * [RequestHandlers 和 SearchComponents](requesthandlers_he_searchcomponents.md)
        * [InitParams](initparams.md)
        * [UpdateHandlers](updatehandlers.md)
-       * Query Settings
+       * [Query Settings](query_settings.md)
        * RequestDispatcher
        * Update Request Processors
        * Codec Factory

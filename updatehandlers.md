@@ -34,7 +34,7 @@
 
 决定最好的自动提交参数，是在性能和准确性(<font color='red'>这应该是搜索结果的准确性</font>)之间做平衡。频繁的更新会提升准确性，因为新的内容会更快的被搜索到，但会降低性能。降低频率能提升性能但需要更久才能在查询里显示更新
 
-`xml
+```xml
 <autoCommit>
   <maxDocs>10000</maxDocs>
   <maxTime>1000</maxTime>
@@ -42,12 +42,67 @@
 </autoCommit>
 ```
 
-可以像设定软提交一样来设定软自动提交，只需要把 `autoCommit` 替换成 `autoSoftCommit`
+可以像设定自动提交一样来设定软自动提交，只需要把 `autoCommit` 替换成 `autoSoftCommit`
 
-### cmomitWithin 一起提交
+```xml
+<autoSoftCommit>
+  <maxTime>1000</maxTime>
+</autoSoftCommit>
+```
 
+### cmomitWithin
 
+`commitWithin` 设置可强制文档在一个定义的时间段提交。多用于 `Near Real Time Searching`，默认是执行软提交。在主从架构下，不会复制新文档到从服务器。可以添加一个参数来强制硬提交，如下
+
+```xml
+<commitWithin>
+  <softCommit>false</softCommit>
+</commitWithin>
+```
+
+这样配置后，每次当你的更新信息的一部分是 `commitWithin`，就会自动执行硬提交
 
 ## Event Listeners 事件监听器
 
+UpdateHandler 可配置更新相关的时间监听器。可以在任何提交(`event="postCommit"`)以后或者仅在优化指令(`event="postOptimize"`)之后被触发
+
+可以编写自己的更新事件监听器，但一般是通过 `RunExecutableListerer` 来运行外部程序
+
+| 设置 | 说明 |
+| -- | -- |
+| exe | 要运行的程序名称，应该是相对于 solr home 的路径名 |
+| dir | 工作目录，默认是 "." |
+| wait | 强制调用线程等待，直到程序返回响应。默认=true |
+| args | 传送给程序的任意参数，默认为空 |
+| env | 任意要设置的环境变量，默认为空 |
+
 ## Transaction Log 事务日志
+
+在 `RealTime Get` 里描述过，事务日志是那个特性必须的。在 `solrconfig.xml` 的 `updateHandler` 里配置
+
+实时获取当前依赖更新日志，默认是开启滴。配置如下
+
+```xml
+<updateLog>
+  <str name="dir">${solr.ulog.dir:}</str>
+</updateLog>
+```
+
+有 3 个专家级的配置项可影响索引性能及一个 replica 在必须进入全量恢复前可以落后于更新多远——参考 [写入侧容错](https://cwiki.apache.org/confluence/display/solr/Read+and+Write+Side+Fault+Tolerance#ReadandWriteSideFaultTolerance-WriteSideFaultTolerance) 获取更新信息
+
+| 设置名称 | 类型 | 默认值 | 说明 |
+| -- | -- | -- | -- |
+| numRecordsToKeep | int | 100 | 每个日志多少条更新记录 |
+| maxNumLogsToKeep | int | 10 | 最多几个日志 |
+| numVersionBuckets | int | 65536 | 翻译不能... |
+
+一个例子，`solrconfig.xml` 要包含在 `<config><updateHandler>`，使用如下高级设置
+
+```xml
+<updateLog>
+  <str name="dir">${solr.ulog.dir:}</str>
+  <int name="numRecordsToKeep">500</int>
+  <int name="maxNumLogsToKeep">20</int>
+  <int name="numVersionBuckets">65536</int>
+</updateLog>
+```
