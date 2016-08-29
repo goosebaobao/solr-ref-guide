@@ -19,7 +19,7 @@
        * [IndexConfig](indexconfig.md)
        * [RequestHandlers 和 SearchComponents](requesthandlers_he_searchcomponents.md)
        * [InitParams](initparams.md)
-       * UpdateHandlers
+       * [UpdateHandlers](updatehandlers.md)
        * Query Settings
        * RequestDispatcher
        * Update Request Processors
