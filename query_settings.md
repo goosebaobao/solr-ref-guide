@@ -18,4 +18,24 @@ solr 有 3 个 cache 实现：`solr.search.LRUCache`, `solr.search.FastLRUCache`
 
 缩写 LRU 代表 Least Recently Used(最近最少使用)，当一个 LRU cache 充满，最后访问的最老的对象会被清理，给新的对象提供空间。结果就是频繁访问的对象会留在 cache，同时那些不是频繁访问的对象被清理，如果需要的话会重新从索引里取到 cache
 
-`FastLRUCache` 
+`FastLRUCache`，solr 1.4 已引入，无锁设计(<font color='red'>lock-free，相对于 `LRUCache` 可以做到读写不加锁</font>)，所以很适合缓存那些在一个请求里被命中多次的对象
+
+`LRUCache` 和 `FastLRUCache` 在预热时，用一个整数或百分比来评估相对于当前 cache 大小的的自动预热数(<font color='red'>意思是初始化时预加载多少数据吗?</font>)
+
+`LFUCache` 引用 Least Frequently Used(最近最不常用) cache。工作方式类似 LRU cache，除了当 cache 充满时最少使用的对象会被淘汰。
+
+> **LRU 和 LFU 区别**
+>
+> * LRU 根据最后一次命中时间来淘汰数据
+> * LFU 淘汰在一个时间段内命中次数最少的
+> 
+> 例如，一个空闲很久的对象上一秒刚刚被命中，LRU 很大概率保留该对象，LFU 很大概率淘汰该对象
+> 
+> by goosebaobao
+
+solr 管理界面的统计页会显示所有活动 cache 的执行信息，可以帮助你调整适合应用的 cache 尺寸。当一个 searcher 结束，其 cache 的使用概要会写入日志。
+
+每个 cache 都有定义初始尺寸(`initialSize`)，最大尺寸(`size`)，预热时的对象数量(`autowarmCount`)的设置。 LRU 和 FastLRUCache 实现可以用百分比来代替 `autowarmCount` 的绝对数量值
+
+以下是各个 cache 的细节描述
+
