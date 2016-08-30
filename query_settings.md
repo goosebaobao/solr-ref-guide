@@ -45,3 +45,36 @@ solr 管理界面的统计页会显示所有活动 cache 的执行信息，可�
 
 solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用相同参数的查询命中并从 cache 返回结果。参考 [搜索](pu_tong_cha_xun_can_shu.md) 了解 `fq` 参数详情。
 
+当配置参数 `facet.method` 设置为 `fc`，solr 也把这个用于缓存 faceting。
+
+```xml
+<filterCache class="solr.LRUCache" 
+    size="512" 
+    initialSize="512" 
+    autowarmCount="128"/>
+```
+
+### documentCache
+
+介个 cache 保存 Lucene 文档对象(每个文档的存储字段)。由于 Lucene 内部的文档 id 是临时的，这个 cache 不会自动预热。`documentCache` 的大小应该总是大于 `max_results` 乘以 `max_concurrent_queries`，以确保不需要在一个请求里重新获取文档。你的文档存储的字段越多，这个 cache 占用的内存越多。
+
+```xml
+<documentCache class="solr.LRUCache" 
+    size="512" 
+    initialSize="512" 
+    autowarmCount="0"/>
+```
+
+### 使用自定义 cache
+
+你也可以定义一个用你自己的代码的 cache。可以调用 `SolrIndexSearch` 的方法 `getCache()`， `cacheLookup()`， `cacheInsert()` 拿到你的 cache 对象并使用它。
+
+```xml
+<cache name="myUserCache" class="solr.LRUCache"
+    size="4096"
+    initialSize="1024"
+    autowarmCount="1024"
+    regenerator="org.mycompany.mypackage.MyRegenerator" />
+```
+
+如果想要自动预热你的 cache，包含一个 `regenerator` 属性，值为 `solr.search.CacheRegenerator` 实现类的全路径名。也可以使用 `NoOpRegenerator`，用旧的项目简单填充 cache。在 `regenerator` 参数里定义： `regenerator="solr.NoOpRegenerator"`
