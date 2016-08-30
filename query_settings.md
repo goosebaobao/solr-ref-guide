@@ -78,3 +78,88 @@ solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用
 ```
 
 如果想要自动预热你的 cache，包含一个 `regenerator` 属性，值为 `solr.search.CacheRegenerator` 实现类的全路径名。也可以使用 `NoOpRegenerator`，用旧的项目简单填充 cache。在 `regenerator` 参数里定义： `regenerator="solr.NoOpRegenerator"`
+
+## Query Sizing and Warming
+
+### maxBooleanClauses
+
+一个 boolean 查询最多有几个从句。可影响范围或前缀查询扩展的大量 boolean 查询。如果超过限制会抛出异常
+
+```xml
+<maxBooleanClauses>1024</maxBooleanClauses>
+```
+
+> 该选项对所有 core 生效。如果多个 `solrconfig.xml` 文件里该属性不一致，最后一个初始化的 core 的值被采用
+
+### enableLazyFieldLoading
+
+若设为 true 则非直接请求的字段会延迟加载。如果大多数一般查询只需要一个小的字段子集，尤其是很少访问的字段有大的尺寸时可提升性能
+
+```xml
+<enableLazyFieldLoading>true</enableLazyFieldLoading>
+```
+
+### useFilterForStortedQuery
+
+配置 solr 使用过滤器来满足一个搜索。如果请求的排序不包含 "score"， `filterCache` 将用过滤器来匹配该查询。多数场景下，如果相同的搜索请求经常用不同的排序选项且都不用 "score" 才有用。
+
+```xml
+<useFilterForSortedQuery>true</useFilterForSortedQuery>
+```
+
+### QueryResultWindowSize
+
+和 `queryResultCache` 一起使用，将 cache 超出请求的文档的 id。例如，如果一个搜索请求 文档 10 到 19，且 `QueryResultWindowSize` 为 50，文档 0 到 49 将被 cache。
+
+```xml
+<queryResultWindowSize>20</queryResultWindowSize>
+```
+
+### queryResultMaxDocsCached
+
+这个参数设置 `queryResultCache` 里任意 key 缓存的文档最大数量
+
+```xml
+<queryResultMaxDocsCached>200</queryResultMaxDocsCached>
+```
+
+### useColdSearcher
+
+若当前没有注册的 searcher，搜索请求应该等待一个新的 searcher 预热(false)还是立即执行(true)。当设为 false，请求会阻塞，直到 searcher 完成其 cache 的预热
+
+```xml
+<useColdSearcher>false</useColdSearcher>
+```
+
+### maxWarmingSearchers
+
+任何时刻，后台正在预热的 searcher 最多可以有几个。超过该限制会抛出错误(error)。对只读的从机(slave)，2 是合理的。主机(master)应高一点点
+
+```xml
+<maxWarmingSearchers>2</maxWarmingSearchers>
+```
+
+## Query-Related Listeners 查询相关监听器
+
+在 [cache](#cache) 章节已描述过，新的 Index Searcher 是缓存的。使用监听器触发执行查询相关的任务是可能的。最通用的是在定义查询推动 Index Searcher 启动时预热。这个做法其中一个好处是字段 cache 会预填充以加速排序。
+
+良好的查询选择器(?)是这类监听器的关键。最好选择你最常用和/或最重的查询，并且不仅包括用到的关键字，还有任何其他参数诸如排序或过滤请求。
+
+有 2 类事件可以触发监听器。一个 `firstSearch` 事件
+
+```xml
+<listener event="newSearcher" class="solr.QuerySenderListener">
+  <arr name="queries">
+  <!--
+    <lst><str name="q">solr</str><str name="sort">price asc</str></lst>
+    <lst><str name="q">rocks</str><str name="sort">weight asc</str></lst>
+  -->
+  </arr>
+</listener>
+
+<listener event="firstSearcher" class="solr.QuerySenderListener">
+  <arr name="queries">
+    <lst><str name="q">static firstSearcher warming in solrconfig.xml</str></lst>
+  </arr>
+</listener>
+```
