@@ -43,5 +43,5 @@ solr 管理界面的统计页会显示所有活动 cache 的执行信息，可�
 
 `SolrIndexSearcher` 用这个 cache 过滤匹配一个查询的所有未排序的文档集。数值属性用来控制 cache 里的对象数量。
 
-solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用相同参数的查询命中并从 cache 返回结果。参考 [搜索](sou_suo.md) 了解 `fq` 参数详情。
+solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用相同参数的查询命中并从 cache 返回结果。参考 [搜索](pu_tong_cha_xun_can_shu.md) 了解 `fq` 参数详情。
 
