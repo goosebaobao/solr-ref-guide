@@ -21,7 +21,7 @@
        * [InitParams](initparams.md)
        * [UpdateHandlers](updatehandlers.md)
        * [Query Settings](query_settings.md)
-       * RequestDispatcher
+       * [RequestDispatcher](requestdispatcher.md)
        * Update Request Processors
        * Codec Factory
    * solr cores 及 solr.xml
