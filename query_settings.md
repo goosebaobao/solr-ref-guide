@@ -145,7 +145,9 @@ solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用
 
 良好的查询选择器(?)是这类监听器的关键。最好选择你最常用和/或最重的查询，并且不仅包括用到的关键字，还有任何其他参数诸如排序或过滤请求。
 
-有 2 类事件可以触发监听器。一个 `firstSearch` 事件
+有 2 类事件可以触发监听器。当一个新的 searcher 正在准备但当前没有已注册的 searcher 来处理请求或来获取预热的数据(如 solr 启动)时一个 `firstSearch` 事件发生。一个新的 searcher 正在准备且当前有 searcher 可处理请求时一个 `newSearcher` 事件发生。
+
+下面的例子可在 solr 包含的 `sample_techproducts_configs` 配置集 的 `solrconfig.xml` 文件里找到，演示了 `solr.QuerySenderListener` 类预热一些特定查询的用法
 
 ```xml
 <listener event="newSearcher" class="solr.QuerySenderListener">
@@ -163,3 +165,5 @@ solr 用 `filterCache` 来缓存使用 `fq` 参数的查询结果。后续使用
   </arr>
 </listener>
 ```
+
+> 上面的代码来自一个实例 `solrconfig.xml`。一个关键的最佳实践是在部署你的应用到生产环节前修改这些默认值，但请注意：在 `newSearcher` 事件里的查询被注释而 `firstSearcher` 事件里的没有。如果和你的搜索应用无关的话，你的 index searcher 自动预热 "static firstSearcher warming in solrconfig.xml" 没有意义。
