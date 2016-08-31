@@ -22,7 +22,7 @@
        * [UpdateHandlers](updatehandlers.md)
        * [Query Settings](query_settings.md)
        * [RequestDispatcher](requestdispatcher.md)
-       * Update Request Processors
+       * [Update Request Processors](update_request_processors.md)
        * Codec Factory
    * solr cores 及 solr.xml
    * 配置 API
