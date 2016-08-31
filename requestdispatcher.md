@@ -10,7 +10,24 @@
 
 在 solr 最新版本里，`/select` requestHandler 是默认定义的，所以 `false` 设置会很好的生效。参考 [RequestHandler 和 SearchComponent](requesthandlers_he_searchcomponents.md)获取更多信息
 
+```xml
+<requestDispatcher handleSelect="true" >
+  ...
+</requestDispatcher>
+```
+
 ## requestParsers
+
+`requestParsers>` 控制解析请求。这是个空 xml 元素，没有内容只有属性。
+
+
+
+```xml
+<requestParsers enableRemoteStreaming="true"
+    multipartUploadLimitInKB="2048000"
+    formdataUploadLimitInKB="2048"
+    addHttpRequestToContext="false" />
+```
 
 ## httpCaching
 
