@@ -25,7 +25,33 @@ update request processor 链的创建，既可以在 solrconfig.xml 里直接创
 
 ### The default update request processor chain 默认更新请求处理器链
 
+如果 solrconfig.xml 里没有配置 update processor 链，solr 自动创建默认的 update processor 链作用于所有更新请求。这个默认的 update processor 链由下面的处理器按顺序组成
 
+1.LogUpdateProcessorFactory - 在请求期间跟踪命令的处理并记下日志
+2.DistributedUpdateProcessorFactory - 负责将更新请求分发到正确的节点。例如，路由请求到正确的 shard 的 leader，且将请求从 leader 分发到每个 replica。这个 processor 仅在 SolrCloud 模式才会激活
+3.RunUpdateProcessorFactory - 使用 solr 内部的 api 来执行更新
+
+每个 processor 执行一个基本功能，且自定义链通常会包含全部这些 processor。在自定义链里 RunUpdateProcessorFactory 通常是最后一个 processor
+
+### Custom update request processor chain 自定义更新请求处理器链
+
+下面的例子演示了如何在 solrconfig.xml 配置自定义链
+
+```xml
+<!-- updateRequestProcessorChain -->
+
+<updateRequestProcessorChain name="dedupe">
+  <processor class="solr.processor.SignatureUpdateProcessorFactory">
+    <bool name="enabled">true</bool>
+    <str name="signatureField">id</str>
+    <bool name="overwriteDupes">false</bool>
+    <str name="fields">name,features,cat</str>
+    <str name="signatureClass">solr.processor.Lookup3Signature</str>
+  </processor>
+  <processor class="solr.LogUpdateProcessorFactory" />
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateRequestProcessorChain>
+```
 
 ## Update processors in SolrCloud
 
