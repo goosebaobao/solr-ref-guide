@@ -88,6 +88,16 @@ update request processor 链的创建，既可以在 solrconfig.xml 里直接创
 
 ## Update processors in SolrCloud
 
+solr 单机模式，每个更新只会被链里的更新处理器执行一次。在 SolrCloud 模式下更新处理器的行为值得特别考虑。
+
+SolrCloud 的一项关键功能是路由和分发请求 - 对于更新请求这是由 DistributedUpdateRequestProcessor 实现的，且这个处理器因其重要功能被 solr 给与了特殊地位。
+
+在分布式 SolrCloud 场景，链里的所有 DistributedUpdateProcessor *之前* 的处理器在接收客户端请求的第一个节点(node)上运行，不论这个节点是 leader 或 replica。然后 DistributedUpdateProcessor 转发更新到恰当的 shard 的 leader(或多个 leader，如果该更新影响多个文档，例如删除或提交)。Shard Leader 通过事务日志来运用原子更新，然后转发更新到 shard 的所有 replica。Leader 和每个 replica 执行链上的所有在 DistributedUpdateProcessor *之后* 的处理器。
+
+
+
+
+
 ## Using custom chains
 
 ## Update Request processor Factories
