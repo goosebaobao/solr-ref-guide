@@ -53,6 +53,39 @@ update request processor 链的创建，既可以在 solrconfig.xml 里直接创
 </updateRequestProcessorChain>
 ```
 
+上面的例子，用 SignatureUpdateProcessorFactory， LogUpdateProcessorFactory， RunUpdateProcessorFactory 新建了一个名为 "dedupe" 的更新处理器链。 SignatureUpdateProcessorFactory 有几个参数，诸如 "signatureField"， "overwriteDupes" 等等。这个链示例了 solr 如何配置对文档去重，通过计算用 name， features， cat 字段的值的签名用作 id 字段。你可能注意到，这个例子没有指定 DistributedUpdateProcessorFactory - 因为这个处理器对 solr 正确运作及其重要，solr 将自动插入 DistributedUpdateProcessorFactory 到不包含它的链里，刚好在 RunUpdateProcessorFactory 之前。
+
+> **RunUpdateProcessorFactory**
+> 不要忘记将 RunUpdateProcessFactory 添加到你在 solrconfig.xml 里定义的任何链的末尾，否则那个链的更新请求将不会真正地更新索引数据
+
+### 配置顶级处理器
+
+在 solrconfig.xml 也可以配置独立于链的 update request processor 
+
+```xml
+<!-- updateProcessor -->
+
+<updateProcessor class="solr.processor.SignatureUpdateProcessorFactory" name="signature">
+  <bool name="enabled">true</bool>
+  <str name="signatureField">id</str>
+  <bool name="overwriteDupes">false</bool>
+  <str name="fields">name,features,cat</str>
+  <str name="signatureClass">solr.processor.Lookup3Signature</str>
+</updateProcessor>
+
+<updateProcessor class="solr.RemoveBlankFieldUpdateProcessorFactory" name="remove_blanks"/>
+```
+
+这个例子里，配置了名为 "signature" 的 SignatureUpdateProcessorFactory 和名为 "remove_blanks" 的 RemoveBlankFieldUpdateProcessorFactory。在 solrconfig.xml 如上定义后，就可以在 update request processor 链里引用他们，如下
+
+```xml
+<!-- updateRequestProcessorChains and updateProcessors -->
+
+<updateProcessorChain name="custom" processor="remove_blanks,signature">
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateProcessorChain>
+```
+
 ## Update processors in SolrCloud
 
 ## Using custom chains
