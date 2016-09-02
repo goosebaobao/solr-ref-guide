@@ -94,10 +94,135 @@ SolrCloud 的一项关键功能是路由和分发请求 - 对于更新请求这�
 
 在分布式 SolrCloud 场景，链里的所有 DistributedUpdateProcessor *之前* 的处理器在接收客户端请求的第一个节点(node)上运行，不论这个节点是 leader 或 replica。然后 DistributedUpdateProcessor 转发更新到恰当的 shard 的 leader(或多个 leader，如果该更新影响多个文档，例如删除或提交)。Shard Leader 通过事务日志来运用原子更新，然后转发更新到 shard 的所有 replica。Leader 和每个 replica 执行链上的所有在 DistributedUpdateProcessor *之后* 的处理器。
 
+例如，考虑上节看到的 "dedupe" 链。假定 SolrCloud 集群由 3 个节点组成，NodeA 是 shard1 Leader，NodeB 是 shard2 Leader，NodeC 是 shard2 replica。一个更新请求发送到 NodeA，由于这个更新属于 shard2，所以 NodeA 转发给 NodeB，NodeB 分发给自己的 replica NodeC。我们看看每个 node 上都发生了什么
 
+* NodeA：执行更新从 SignatureUpdateProcessor(计算签名并赋值给 id 字段)，然后是 LogUpdateProcessor 和 DistributeUpdateProcessor。这个处理器判断这个更新实际属于 NodeB，转发更新请求给 NodeB。不再进行后续的处理。这是必须的，因为下一个处理器即 RunUpdateProcessor 将不会在 shard1 上执行更新以避免 shard1 和 shard2 上有重复的数据。
+* NodeB：接收到更新请求，发现是从另一个 node 转发过来的(<font color='red'>不是从客户端直接过来的</font>)。这个更新被直接发送给 DistributeUpdateProcessor，因为它已经在 NodeA 上通过了 SignatureUpdateProcessor，再计算签名就没有必要了。DistributeUpdateProcessor 判断这个更新的确属于当前 node，分发更新请求到 NodeC 上的 replica，然后转发更新请求到链上后续的 RunUpdateProcessor
+* NodeC：接收到更新请求，发现是从 leader 分发过来的。这个更新请求直接发送到 DistributeUpdateProcessor，执行一些一致性检查，转发给链上后续的 RunUpdateProcessor
 
+总结
 
+1. 在 DistributeUpdateProcessor 之前的所有处理器只会在接收到更新请求的第一个 node 上运行，不论它是转发 node(上面的 NodeA)或 leader(NodeB)。我们称之为预处理器
+2. 在 DistributeUpdateProcessor 之后的所有处理器只会在 leader 和 replica 节点上运行。不会在转发 node 上执行。这些处理器称为后处理器
 
-## Using custom chains
+上一节里，我们看到 updateRequestProcessorChain 配置有 `processor="remove_blanks,signature"`。这表示这些处理器是第一类处理器(<font color='red'>预处理器</font>)，只在转发节点上运行。类似的，我们可以将它们配置为第二类处理器，只要用 "post-processor" 属性来指定，如下所示
+
+```xml
+<!-- post-processors -->
+
+<updateProcessorChain name="custom" processor="signature"
+    post-processor="remove_blanks">
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateProcessorChain>
+```
+
+总之，在 SolrCloud 集群上通过负载均衡随机的发送请求，使其仅在转发节点上运行一个处理器是分配高代价的计算诸如删除重复数据的一个伟大的方法。否则这个高代价的计算将会在 leader 和 replica 节点重复执行。
+
+> 预处理器和原子更新
+> DistributeUpdateProcessor 负责在 leader 节点上处理所有文档的 `原子更新`，这意味着仅在转发节点执行的预处理器只能处理特定的部分文档。如果你的处理器必须处理全部文档，那么唯一的选择是指定为后处理器。
+
+## Using custom chains 使用自定义链
+
+### update.chain request parameter 请求参数 update.chain
+
+请求参数 update.chain 可用于任意更新请求，选择一个在 solrconfig.xml 里的自定义链。例如，要选择前述章节里的 "dedupe" 链，可以如下发送请求
+
+```bash
+# update.chain
+
+curl "http://localhost:8983/solr/gettingstarted/update/json?update.chain=dedupe&commit=true" -H 'Content-type: application/json' -d '
+[
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  },
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  }
+]'
+
+```
+
+上面的例子，2 个同样的文档将只会索引其中一个
+
+### processor & post-processor request parameters 请求参数 processor 和 post-processor
+
+使用 "processor" 和 "post-processor" 请求参数，我们可以动态构造一个自定义的更新请求处理器链。多个处理器可以用逗号分隔，示例如下
+
+```bash
+# Constructing a chain at request time
+
+# Executing processors configured in solrconfig.xml as (pre)-processors
+curl "http://localhost:8983/solr/gettingstarted/update/json?processor=remove_blanks,signature&commit=true" -H 'Content-type: application/json' -d '
+[
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  },
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  }
+]'
+
+# Executing processors configured in solrconfig.xml as pre and post processors
+curl "http://localhost:8983/solr/gettingstarted/update/json?processor=remove_blanks&post-processor=signature&commit=true" -H 'Content-type: application/json' -d '
+[
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  },
+  {
+    "name" : "The Lightning Thief",
+    "features" : "This is just a test",
+    "cat" : ["book","hardcover"]
+  }
+]'
+```
+
+第一个例子，solr 动态创建的链有 "signature" 和 "remove_blanks" 预处理器，仅在转发节点执行；第二个例子，"remove_blanks" 是预处理器，"signature" 在 leader 和 replica 上作为后处理执行
+
+### configuring a custom chain as a default 配置自定义链为默认
+
+我们也可以指定一个自定义链为所有请求的默认，取代在每个请求参数里指定链名称
+
+可以在指定路径里添加 "update.chain" 或 "processor" 和 "post-processor" 作为默认参数，参考 [iniParams](imitparams.md)；或作为默认处理器，参考 [defaults](requesthandlers_he_searchcomponents.md)
+
+下面例子是用 initParams 设定使用自定义更新链处理 "/update/" 开头的请求
+
+```xml
+<!-- initParams -->
+
+<initParams path="/update/**">
+  <lst name="defaults">
+    <str name="update.chain">add-unknown-fields-to-the-schema</str>
+  </lst>
+</initParams>
+```
+
+如下所示，使用 "defaults" 也可以实现类似效果
+
+```xml
+<!-- defaults -->
+
+<requestHandler name="/update/extract" startup="lazy" 
+    class="solr.extraction.ExtractingRequestHandler" >
+  <lst name="defaults">
+    <str name="update.chain">add-unknown-fields-to-the-schema</str>
+  </lst>
+</requestHandler>
+```
 
 ## Update Request processor Factories
+
+### FieldMutatingUpdateProcessorFactory derived factories
+
+### Update Processor factories that can be loaded as plugins
+
+### Update Processor factories you should *not* modify or remove.
