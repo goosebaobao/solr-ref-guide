@@ -23,8 +23,12 @@
        * [Query Settings](query_settings.md)
        * [RequestDispatcher](requestdispatcher.md)
        * [Update Request Processors](update_request_processors.md)
-       * Codec Factory
-   * solr cores 及 solr.xml
+       * [Codec Factory](codec_factory.md)
+   * [solr cores 及 solr.xml](solr_cores_ji_solr__xml.md)
+       * [solr.xml 格式](solrxml_ge_shi.md)
+       * 定义 core.properties
+       * Core 管理 API
+       * Config Sets 配置集
    * 配置 API
    * solr 插件
    * JVM 设置
