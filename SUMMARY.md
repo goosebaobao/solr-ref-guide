@@ -1,6 +1,17 @@
 # Summary
 
 * [关于本书](README.md)
+* [文档 字段 schema 设计](wen_dang_zi_duan_schema_she_ji.md)
+   * [文档 字段 schema 概述](wen_dang_zi_duan_schenma_gai_shu.md)
+   * solr 字段类型
+   * 定义字段
+   * 复制字段
+   * 动态字段
+   * 其他 schema 元素
+   * schema API
+   * 完整拼图
+   * DocValues
+   * 无 schema 模式
 * [搜索](sou_suo.md)
    * [查询语法及解析](cha_xun_yu_fa_ji_jie_xi.md)
        * [普通查询参数](pu_tong_cha_xun_can_shu.md)
