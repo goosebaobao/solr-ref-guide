@@ -26,7 +26,7 @@
        * [Codec Factory](codec_factory.md)
    * [solr cores 及 solr.xml](solr_cores_ji_solr__xml.md)
        * [solr.xml 格式](solrxml_ge_shi.md)
-       * 定义 core.properties
+       * [定义 core.properties](ding_yi_core__properties.md)
        * Core 管理 API
        * Config Sets 配置集
    * 配置 API
