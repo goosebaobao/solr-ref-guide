@@ -40,5 +40,6 @@ solr 保存它期望理解的字段和字段类型的细节在 schema 文件。�
 * `schema.xml` 是 schema 文件的传统名字，可以被用户手工修改，使用 `ClassicSimilarityFactory`
 * 如果使用的是 solrcloud，可能在本地文件系统找不到以上命名的文件。只能用 schema api(如果开启) 查看 schema，或通过 solr 管理界面的 `cloud screen`
 
+不管你的 solr 用的是哪个名字的文件，文件的结构是不变滴。但是，你和文件交互的方式将改变。如果你在使用 managed schema，你只能用 shcema api 与之交互，不能手工编辑。如果不用 managed schema，只能手工修改该文件，不支持用 schema api 修改。
 
-
+注意，如果你在用 solrcloud 而没有用 schema api，你可以用 upconfig 和 downconfig 命令创建一个 `schema.xml` 的本地拷贝并上传你的改变到 ZooKeeper。
