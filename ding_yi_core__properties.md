@@ -57,21 +57,3 @@ java 属性文件可以用 "#" 或 "!" 注释一行
 | shard | 分配给这个 core 的 shard (solrcloud) |
 | collection | 这个 core 所属的 collection (solrcloud) |
 | roles | solrcloud 将来的参数，或用户用来标记 node 为自用的 |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
