@@ -292,18 +292,153 @@ NOW+6MONTHS+3DAYS/DAY
 1972-05-20T17:33:18.772Z+6MONTHS+3DAYS/DAY
 ```
 
-#### 影响数学日期所需要的参数
+#### 影响数学日期的请求参数
 
 ##### NOW
 
-在一个分布式请求里，solr 内部使用 `NOW` 参数来确保数学日期表达式跨越多个节点的一致性。但是，它也可以指定为命令 solr 使用一个任意的时刻(过去或未来的)来覆盖，为了所有场景，那里特殊值 "`NOW`" 会加入数学日期表达式。
+在一个分布式请求里，solr 内部使用 `NOW` 参数来确保数学日期表达式跨越多个节点解析的一致性。但是，它也可以被一个任意的时刻(过去或未来)覆盖。
+
+如果要设定 `NOW` 的值，必须为从 epoch(1970年1月1日00:00:00 UTC) 开始的毫秒数
+
+示例
+
+```
+q=solr&fq=start_date:[* TO NOW]&NOW=1384387200000
+```
 
 ##### TZ
 
+默认情况下，所有数学日期表达式都被认为是相对于 UTC 时区，但是，可以设定 `TZ` 参数来覆盖默认行为。
+
+例如，下面的请求在 UTC 当前月的每一天使用范围 faceting
+
+```bash
+http://localhost:8983/solr/my_collection/select?\
+q=*:*&facet.range=my_date_field&facet=true&facet.range.start=NOW/MONTH&\
+facet.range.end=NOW/MONTH%2B1MONTH&facet.range.gap=%2B1DAY
+```
+
+```xml
+<int name="2013-11-01T00:00:00Z">0</int>
+<int name="2013-11-02T00:00:00Z">0</int>
+<int name="2013-11-03T00:00:00Z">0</int>
+<int name="2013-11-04T00:00:00Z">0</int>
+<int name="2013-11-05T00:00:00Z">0</int>
+<int name="2013-11-06T00:00:00Z">0</int>
+<int name="2013-11-07T00:00:00Z">0</int>
+...
+```
+
+下面这个例子，使用指定的时区
+
+```bash
+http://localhost:8983/solr/my_collection/select?\
+q=*:*&facet.range=my_date_field&facet=true&facet.range.start=NOW/MONTH&\
+facet.range.end=NOW/MONTH%2B1MONTH&facet.range.gap=%2B1DAY&TZ=America/Los_Angeles
+
+```
+
+```xml
+<int name="2013-11-01T07:00:00Z">0</int>
+<int name="2013-11-02T07:00:00Z">0</int>
+<int name="2013-11-03T07:00:00Z">0</int>
+<int name="2013-11-04T08:00:00Z">0</int>
+<int name="2013-11-05T08:00:00Z">0</int>
+<int name="2013-11-06T08:00:00Z">0</int>
+<int name="2013-11-07T08:00:00Z">0</int>
+...
+```
+
 ### 更多 DataRangeField 细节
 
+几乎所有使用 `TrieDateField` 的地方都可以随时用 `DateRangeFiled` 替换。唯一的不同是 solr 的 xml 或 solrj 里显示其存储的数据格式为字符串而不是日期型。索引的数据会大一点。按时间单位秒对齐的查询要比 TrieDateField 更快，尤其是用 UTC。但主要的是，正如其名，允许按日期范围索引。为此，只需要按上面格式提交字符串。它还支持在索引数据和查询范围间的 3 种不同的断言：`Intersects`(默认)，`Contains`，`Within`。可以在查询里用本地参数 `op` 来指定断言，如下
+
+```
+fq={!field f=dateRange op=Contains}[2013 TO 2018]
+```
+
+这个例子里，会查找索引范围包含(或等于) 2013 到 2018 的文档。
+
+DateRangeFiled 示例和其他信息，参阅 [solr's community wiki](http://wiki.apache.org/solr/DateRangeField)
+
 ## 枚举字段
+
+枚举字段类型可以定义一个取值范围是一个闭集的字段，且值的排序顺序是预定义好的，而非按字母或数字排序。例如，严重性列表，风险列表。
+
+### 在 schema.xml 里定义枚举字段
+
+枚举字段类型的定义很简单，如下面的例子，定义了严重级别和风险级别的枚举
+
+```xml
+<fieldType name="priorityLevel" class="solr.EnumField" 
+  enumsConfig="enumsConfig.xml" enumName="priority"/>
+<fieldType name="riskLevel" class="solr.EnumField" 
+  enumsConfig="enumsConfig.xml" enumName="risk" />
+```
+
+除了 `name` 和 `class`，这个类型还有 2 个额外的参数
+
+* `enumsConfig`：包含了该字段类型要用到的 `<enum/>` 字段值列表及其顺序的配置文件名。如果没有指定路径，这个文件应该在 collection 的 `conf` 目录
+* `enumName`：枚举的名字，在 `enumsConfig` 文件里要用。
+
+### 枚举字段配置文件
+
+`enumConfig` 参数指定的文件，可以包含多个枚举值列表，各有不同的名字，可用于你的 solr schema 有多个枚举字段类型。
+
+这个例子里，定义了 2 个枚举值列表，每个都在 `enum` 标签内
+
+```xml
+<?xml version="1.0" ?>
+<enumsConfig>
+  <enum name="priority">
+    <value>Not Available</value>
+    <value>Low</value>
+    <value>Medium</value>
+    <value>High</value>
+    <value>Urgent</value>
+  </enum>
+
+  <enum name="risk">
+    <value>Unknown</value>
+    <value>Very Low</value>
+    <value>Low</value>
+    <value>Medium</value>
+    <value>High</value>
+    <value>Critical</value>
+  </enum>
+</enumsConfig>
+```
+
+> **修改枚举值**
+
+> 除非重建索引，不能修改枚举值的顺序，或移除在 `<enum/>` 里的值，也不能在末尾添加新的值。
 
 ## 外部文件及处理
 
 ## 字段属性用例
+
+这是一个公共用例的概要，以及字段或字段类型要支持该用例所需要的属性。表格里的 true 或 false 表示为了功能正确选项必须设为给定的值。如果输入未提供，则属性值对用例没有影响。
+
+| 用例 | indexed | stored | multiValued | omitNorms | termVectors | termPositions | docValues |
+| -- | -- | -- | -- | -- | -- | -- | -- |
+| search within field | true | | | | | | | 
+| retrieve contents | | true | | | | | |
+| use as unique key | true | | false | | | | | 
+| sort on field | true(7) | | false | true(1) | | | true(7) | 
+| use field boosts | | | | false | | | | 
+| document boosts affect searches within field | | | | false | | | | 
+| highlighting | true(4) | true | | | true(2) | true(3) | | 
+| facting(5) | true(7) | | | | | | true(7) | 
+| add multiple values,maintaining order | | | true | | | | | 
+| field length affects doc score | | | | false | | | | 
+| MoreLikeThis | | | | | true(6) | | &nbsp; | 
+
+注意
+
+1. 推荐，但不是必须的
+2. 如果提供了就会使用，非必须
+3. if termVectors=true
+4. 该字段必须定义 tokenizer，但不必是 indexed 的
+5. faceting，参考 ` Understanding Analyzers, Tokenizers, and Filters`
+6. 这里 Term vectors 不是强制的。如果不是 true，那么一个 stored 字段被分析。所以，term vector 是建议的，但仅当 stored=false 时才是必须的
+7. indexed 和 docValues 都必须是 true，但都不是必须的。DocValues 在很多场景更有效
