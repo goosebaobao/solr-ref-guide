@@ -5,7 +5,7 @@
    * [文档 字段 schema 概述](wen_dang_zi_duan_schema_gai_shu.md)
    * [solr 字段类型](solr_zi_duan_lei_xing.md)
    * [定义字段](ding_yi_zi_duan.md)
-   * 复制字段
+   * [复制字段](fu_zhi_zi_duan.md)
    * 动态字段
    * 其他 schema 元素
    * schema API
