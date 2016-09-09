@@ -7,7 +7,7 @@
    * [定义字段](ding_yi_zi_duan.md)
    * [复制字段](fu_zhi_zi_duan.md)
    * [动态字段](dong_tai_zi_duan.md)
-   * 其他 schema 元素
+   * [其他 schema 元素](qi_ta_schema_yuan_su.md)
    * schema API
    * 完整拼图
    * DocValues
