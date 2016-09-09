@@ -26,7 +26,7 @@ Similarity 是搜索时给文档评分的 Lucene 类。
 
 每个 collection 都有一个全局的 similarity，默认情况下，solr 使用自带的 `SchemaSimilarityFactory`，允许特定字段类型配置其特定的 Similarity，并为所有未明确指定 Similarity 的字段类型使用 `BM25Similarity`。
 
-在 `schema.xml` 里，任何字段类型之外，声明一个顶级的 `<similarity/>` 元素，可覆盖默认行为。这个 similarity 声明要么直接引用一个有无参构造函数的类，例如下面的例子
+在 `schema.xml` 里，任何字段类型的定义之外，声明一个顶级的 `<similarity/>` 元素，可覆盖默认行为。这个 similarity 声明要么直接引用一个有无参构造函数的类，例如下面的例子
 
 ```xml
 <similarity class="solr.BM25Similarity"/>
