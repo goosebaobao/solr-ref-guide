@@ -6,7 +6,7 @@
    * [solr 字段类型](solr_zi_duan_lei_xing.md)
    * [定义字段](ding_yi_zi_duan.md)
    * [复制字段](fu_zhi_zi_duan.md)
-   * 动态字段
+   * [动态字段](dong_tai_zi_duan.md)
    * 其他 schema 元素
    * schema API
    * 完整拼图
