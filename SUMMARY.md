@@ -1,6 +1,7 @@
 # Summary
 
 * [关于本书](README.md)
+* [术语表](shu_yu_biao.md)
 * [文档 字段 schema 设计](wen_dang_zi_duan_schema_she_ji.md)
    * [文档 字段 schema 概述](wen_dang_zi_duan_schema_gai_shu.md)
    * [solr 字段类型](solr_zi_duan_lei_xing.md)
