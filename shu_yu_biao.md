@@ -11,3 +11,6 @@
 | shard | shard，分片 |
 | replica | replica，副本 |
 | leader | leader |
+| node | node，节点 |
+| term | 词条 |
+| token | 词元 |
